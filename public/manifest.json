@@ -1,6 +1,6 @@
 {
-  "short_name": "Graasp App",
-  "name": "Graasp App Starter",
+  "short_name": "Light Pollution Simulator",
+  "name": "Light Pollution Simulator",
   "icons": [
     {
       "src": "favicon.ico",
