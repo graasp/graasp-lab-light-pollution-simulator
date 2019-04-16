@@ -2,6 +2,7 @@ import {
   ADD_LAMP_POST,
   FLAG_REMOVING_LAMP_POST,
   REMOVE_LAMP_POST,
+  RESIZE_LAMP_POST,
 } from '../types';
 import { flag } from './common';
 
@@ -22,4 +23,10 @@ const removeLampPost = ({ x }) => dispatch => {
   dispatch(flagRemovingLampPost(false));
 };
 
-export { addLampPost, removeLampPost };
+const resizeLampPost = ({ x }) => dispatch =>
+  dispatch({
+    type: RESIZE_LAMP_POST,
+    payload: x,
+  });
+
+export { addLampPost, removeLampPost, resizeLampPost };
