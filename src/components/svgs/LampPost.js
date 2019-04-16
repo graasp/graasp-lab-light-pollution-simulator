@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
-import { Line } from 'react-konva';
+import React, { Component, Fragment } from 'react';
+import { Line, Circle } from 'react-konva';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { removeLampPost, resizeLampPost } from '../../actions';
 import { SIZE_LARGE, SIZE_SMALL } from '../../config/settings';
+import Halo from '../common/Halo';
 
 class LampPost extends Component {
   static propTypes = {
@@ -32,6 +33,10 @@ class LampPost extends Component {
     }
   };
 
+  calculateRadius = (scale = 1) => {
+    return scale * 20;
+  };
+
   handleClick = ({ target }) => {
     const { attrs: { id } = {} } = target;
     const {
@@ -54,14 +59,32 @@ class LampPost extends Component {
   render() {
     const { x, y, size, stroke } = this.props;
     return (
-      <Line
-        id={x}
-        size={this.calculateSize(size)}
-        points={[x, y - this.calculateSize(size), x, y]}
-        stroke={stroke}
-        strokeWidth={5}
-        onClick={this.handleClick}
-      />
+      <Fragment>
+        <Halo x={x} y={y} size={size} />
+        <Circle
+          x={x}
+          y={y - this.calculateSize(size) - this.calculateRadius()}
+          radius={this.calculateRadius()}
+          fillRadialGradientStartPoint={{ x: 0, y: 0 }}
+          fillRadialGradientStartRadius={0}
+          fillRadialGradientEndPoint={{ x: 0, y: 0 }}
+          fillRadialGradientEndRadius={100}
+          fillRadialGradientColorStops={[
+            0,
+            'rgba(248, 148, 6, 1)',
+            1,
+            'rgba(248, 148, 6, 0)',
+          ]}
+        />
+        <Line
+          id={x}
+          size={this.calculateSize(size)}
+          points={[x, y - this.calculateSize(size), x, y]}
+          stroke={stroke}
+          strokeWidth={5}
+          onClick={this.handleClick}
+        />
+      </Fragment>
     );
   }
 }

@@ -4,7 +4,11 @@ import {
   REMOVE_LAMP_POST,
   RESIZE_LAMP_POST,
 } from '../types';
-import { DEFAULT_COLOR, DEFAULT_SIZE, SIZE_SMALL } from '../config/settings';
+import {
+  DEFAULT_COLOR_TEXT,
+  DEFAULT_SIZE,
+  SIZE_SMALL,
+} from '../config/settings';
 
 const INITIAL_STATE = {
   content: [],
@@ -21,7 +25,7 @@ export default (state = INITIAL_STATE, { type, payload }) => {
           {
             x: payload,
             size: DEFAULT_SIZE,
-            color: DEFAULT_COLOR,
+            color: DEFAULT_COLOR_TEXT,
           },
         ],
       };
@@ -40,7 +44,7 @@ export default (state = INITIAL_STATE, { type, payload }) => {
           {
             x: payload,
             size: SIZE_SMALL,
-            color: DEFAULT_COLOR,
+            color: DEFAULT_COLOR_TEXT,
           },
         ],
       };
