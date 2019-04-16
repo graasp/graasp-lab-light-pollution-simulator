@@ -1,12 +1,10 @@
 {
-  "name": "graasp-app-starter-react",
-  "version": "0.4.2",
+  "name": "graasp-lab-light-simulator",
+  "version": "0.1.0",
   "private": true,
-  "author": "React EPFL",
+  "author": "Nuno R. C. Gomes",
   "contributors": [
-    "Juan Carlos Farah",
-    "Hassan Abdul Ghaffar",
-    "Mashkour Abdel Aziz"
+    "Juan Carlos Farah"
   ],
   "homepage": ".",
   "license": "MIT",
