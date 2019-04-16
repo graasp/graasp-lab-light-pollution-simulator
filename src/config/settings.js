@@ -1,5 +1,13 @@
 import { LOCAL_API_HOST } from './api';
 
+// lamp post
+export const DEFAULT_SIZE = 'large';
+export const DEFAULT_COLOR = 'yellow';
+
+// area around a post that cannot include other posts
+export const BUFFER_WIDTH = 50;
+export const MAX_LAMP_POSTS = 7;
+
 export const DEFAULT_LANG = 'en';
 export const DEFAULT_MODE = 'student';
 export const DEFAULT_API_HOST =

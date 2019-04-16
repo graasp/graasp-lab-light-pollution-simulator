@@ -5,9 +5,16 @@ import {
   UNEXPECTED_ERROR_MESSAGE,
 } from '../constants/messages';
 
+const showToast = ({ type, message }) => {
+  toast(message, {
+    type,
+    toastId: message,
+  });
+};
+
 const showErrorToast = payload => {
   let message = UNEXPECTED_ERROR_MESSAGE;
-  if (payload instanceof String) {
+  if (payload instanceof String || typeof payload === 'string') {
     message = payload;
   } else if (payload instanceof Object) {
     if (payload.message) {
@@ -21,11 +28,8 @@ const showErrorToast = payload => {
 
   toast.error(message, {
     toastId: message,
-    autoClose: false,
+    autoClose: true,
   });
 };
 
-export {
-  // eslint-disable-next-line import/prefer-default-export
-  showErrorToast,
-};
+export { showErrorToast, showToast };
