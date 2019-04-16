@@ -10,15 +10,18 @@ import {
   patchAppInstanceResource,
   postAppInstanceResource,
   deleteAppInstanceResource,
+  openSettings,
 } from '../../../actions';
 import { getUsers } from '../../../actions/users';
 import Canvas from '../../common/Canvas';
+import Settings from './Settings';
 
 export class TeacherView extends Component {
   static propTypes = {
     // eslint-disable-next-line react/no-unused-prop-types
     t: PropTypes.func.isRequired,
     dispatchGetUsers: PropTypes.func.isRequired,
+    dispatchOpenSettings: PropTypes.func.isRequired,
     classes: PropTypes.shape({}).isRequired,
   };
 
@@ -38,16 +41,18 @@ export class TeacherView extends Component {
   }
 
   render() {
-    const {
-      t,
-      classes,
-      // dispatchOpenSettings,
-    } = this.props;
+    const { t, classes, dispatchOpenSettings } = this.props;
 
     return (
       <div>
         <Canvas />
-        <Fab color="primary" aria-label={t('Settings')} className={classes.fab}>
+        <Settings />
+        <Fab
+          color="primary"
+          aria-label={t('Settings')}
+          className={classes.fab}
+          onClick={dispatchOpenSettings}
+        >
           <SettingsIcon />
         </Fab>
       </div>
@@ -63,6 +68,7 @@ const mapStateToProps = ({ appInstanceResources }) => ({
 // allow this component to dispatch a post
 // request to create an app instance resource
 const mapDispatchToProps = {
+  dispatchOpenSettings: openSettings,
   dispatchGetUsers: getUsers,
   dispatchPostAppInstanceResource: postAppInstanceResource,
   dispatchPatchAppInstanceResource: patchAppInstanceResource,

@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { I18nextProvider } from 'react-i18next';
 import { ToastContainer } from 'react-toastify';
@@ -27,13 +29,22 @@ const theme = createMuiTheme({
   },
 });
 
-const Root = () => (
+const Root = ({ headerVisible }) => (
   <MuiThemeProvider theme={theme}>
     <I18nextProvider i18n={i18nConfig}>
-      <Header />
+      {headerVisible ? <Header /> : null}
       <App />
       <ToastContainer />
     </I18nextProvider>
   </MuiThemeProvider>
 );
-export default Root;
+
+Root.propTypes = {
+  headerVisible: PropTypes.bool.isRequired,
+};
+
+const mapStateToProps = ({ appInstance }) => ({
+  headerVisible: appInstance ? appInstance.settings.headerVisible : true,
+});
+
+export default connect(mapStateToProps)(Root);
