@@ -9,3 +9,6 @@ export const MISSING_API_HOST_MESSAGE = 'Missing API host.';
 export const UNEXPECTED_ERROR_MESSAGE = 'An unexpected error has occurred.';
 export const MISSING_APP_INSTANCE_RESOURCE_ID_MESSAGE =
   'No app instance resource id specified.';
+export const TOO_MANY_LAMP_POSTS_MESSAGE = 'Too many lamp posts!';
+export const LAMP_POST_TOO_CLOSE_MESSAGE =
+  'Lamp post is too close to another one.';

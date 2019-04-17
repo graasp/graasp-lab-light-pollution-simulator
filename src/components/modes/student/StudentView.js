@@ -1,25 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
-import { Alert, Container } from 'reactstrap';
-import { addQueryParamsToUrl } from '../../../utils/url';
+import Canvas from '../../canvas/Canvas';
 
-export const StudentView = ({ t }) => (
-  <Container className="App App-body StudentView">
-    <Alert color="info">
-      {t(
-        'This is the student view. Switch to the teacher view by clicking on the URL below.'
-      )}
-      <a href={addQueryParamsToUrl({ mode: 'teacher' })}>
-        <pre>
-          {`${window.location.host}/${addQueryParamsToUrl({
-            mode: 'teacher',
-          })}`}
-        </pre>
-      </a>
-    </Alert>
-  </Container>
-);
+// eslint-disable-next-line no-unused-vars
+export const StudentView = ({ t }) => <Canvas />;
 
 StudentView.propTypes = {
   t: PropTypes.func.isRequired,
