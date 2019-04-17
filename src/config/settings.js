@@ -8,6 +8,9 @@ export const DEFAULT_COLOR_RGBA = 'rgba(245, 230, 83, 1)';
 // halo
 export const NUM_CIRCLES_IN_HALO = 50;
 
+// sky
+export const SKY_COLOR = '#333232';
+
 // sizes
 export const SIZE_SMALL = 'small';
 export const SIZE_LARGE = 'large';
