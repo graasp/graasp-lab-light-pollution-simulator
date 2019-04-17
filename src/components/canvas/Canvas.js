@@ -75,6 +75,11 @@ class Canvas extends Component {
       return false;
     }
 
+    // do not consider clicks on lamps
+    if (target instanceof Konva.Circle) {
+      return false;
+    }
+
     // do not do anything if there is still activity going on
     if (lampPostActivity) {
       return false;

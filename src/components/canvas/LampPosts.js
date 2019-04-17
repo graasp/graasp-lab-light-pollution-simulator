@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import LampPost from './LampPost';
 
 const LampPosts = ({ lampPosts }) => {
-  return lampPosts.map(({ x, size }) => (
-    <LampPost y={600} x={x} size={size} key={x} />
+  return lampPosts.map(({ x, size, shielding }) => (
+    <LampPost y={600} x={x} size={size} key={x} shielding={shielding} />
   ));
 };
 
