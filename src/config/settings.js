@@ -4,6 +4,10 @@ import { LOCAL_API_HOST } from './api';
 export const DEFAULT_SIZE = 'large';
 export const DEFAULT_COLOR_TEXT = 'yellow';
 export const DEFAULT_COLOR_RGBA = 'rgba(245, 230, 83, 1)';
+export const DEFAULT_SHIELDING = 'none';
+export const FULL_SHIELDING = 'full';
+export const HALF_SHIELDING = 'half';
+export const NO_SHIELDING = 'none';
 
 // halo
 export const NUM_CIRCLES_IN_HALO = 50;

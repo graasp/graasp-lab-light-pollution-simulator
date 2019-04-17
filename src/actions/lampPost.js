@@ -1,5 +1,6 @@
 import {
   ADD_LAMP_POST,
+  CHANGE_LAMP_POST_SHIELDING,
   FLAG_REMOVING_LAMP_POST,
   REMOVE_LAMP_POST,
   RESIZE_LAMP_POST,
@@ -29,4 +30,14 @@ const resizeLampPost = ({ x }) => dispatch =>
     payload: x,
   });
 
-export { addLampPost, removeLampPost, resizeLampPost };
+const changeLampPostShielding = ({ x, shielding }) => dispatch => {
+  dispatch({
+    type: CHANGE_LAMP_POST_SHIELDING,
+    payload: {
+      x,
+      shielding,
+    },
+  });
+};
+
+export { addLampPost, removeLampPost, resizeLampPost, changeLampPostShielding };
