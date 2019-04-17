@@ -13,7 +13,7 @@ import {
   openSettings,
 } from '../../../actions';
 import { getUsers } from '../../../actions/users';
-import Canvas from '../../common/Canvas';
+import Canvas from '../../canvas/Canvas';
 import Settings from './Settings';
 
 export class TeacherView extends Component {

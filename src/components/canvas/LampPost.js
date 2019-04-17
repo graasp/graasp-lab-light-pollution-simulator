@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { removeLampPost, resizeLampPost } from '../../actions';
 import { SIZE_LARGE, SIZE_SMALL } from '../../config/settings';
-import Halo from '../common/Halo';
+import Halo from './Halo';
 
 class LampPost extends Component {
   static propTypes = {

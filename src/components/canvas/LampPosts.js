@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import LampPost from '../svgs/LampPost';
+import LampPost from './LampPost';
 
 const LampPosts = ({ lampPosts }) => {
   return lampPosts.map(({ x, size }) => (

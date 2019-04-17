@@ -3,21 +3,22 @@ import Konva from 'konva';
 import { connect, ReactReduxContext, Provider } from 'react-redux';
 import { Stage, Layer } from 'react-konva';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles/index';
 import Tree from '../svgs/Tree';
 import LampPosts from './LampPosts';
 import { addLampPost } from '../../actions';
-import { BUFFER_WIDTH, MAX_LAMP_POSTS } from '../../config/settings';
+import { BUFFER_WIDTH, MAX_LAMP_POSTS, SKY_COLOR } from '../../config/settings';
 import { showErrorToast } from '../../utils/toasts';
 import {
   LAMP_POST_TOO_CLOSE_MESSAGE,
   TOO_MANY_LAMP_POSTS_MESSAGE,
 } from '../../constants/messages';
+import Stars from './Stars';
 
 class Canvas extends Component {
   static styles = {
     canvas: {
-      backgroundColor: 'white',
+      backgroundColor: SKY_COLOR,
     },
   };
 
@@ -116,6 +117,7 @@ class Canvas extends Component {
             >
               <Provider store={store}>
                 <Layer>
+                  <Stars />
                   <Tree
                     x={tree.x}
                     y={tree.y}
