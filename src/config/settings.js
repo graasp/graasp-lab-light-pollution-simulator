@@ -2,7 +2,11 @@ import { LOCAL_API_HOST } from './api';
 
 // lamp post
 export const DEFAULT_SIZE = 'large';
-export const DEFAULT_COLOR = 'yellow';
+export const DEFAULT_COLOR_TEXT = 'yellow';
+export const DEFAULT_COLOR_RGBA = 'rgba(245, 230, 83, 1)';
+
+// halo
+export const NUM_CIRCLES_IN_HALO = 50;
 
 // sizes
 export const SIZE_SMALL = 'small';

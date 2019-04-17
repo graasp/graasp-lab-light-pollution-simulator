@@ -69,8 +69,8 @@ class Canvas extends Component {
     const { clientX } = evt;
     const { dispatchAddLampPost, lampPosts, lampPostActivity } = this.props;
 
-    // only consider clicks on the stage
-    if (!(target instanceof Konva.Stage)) {
+    // do not consider clicks on the lamp posts
+    if (target instanceof Konva.Line) {
       return false;
     }
 

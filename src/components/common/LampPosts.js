@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import LampPost from '../svgs/LampPost';
 
 const LampPosts = ({ lampPosts }) => {
-  return lampPosts.map(({ x, size }) => <LampPost y={600} x={x} size={size} />);
+  return lampPosts.map(({ x, size }) => (
+    <LampPost y={600} x={x} size={size} key={x} />
+  ));
 };
 
 const mapStateToProps = ({ lampPost }) => {
