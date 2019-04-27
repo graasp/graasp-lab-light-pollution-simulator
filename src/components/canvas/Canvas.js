@@ -62,7 +62,7 @@ class Canvas extends Component {
       ...tree,
       scaleX: scale,
       scaleY: 1.3 * scale,
-      y: height - 410, //350
+      y: height - 410,
       x: width - 500,
     };
 
