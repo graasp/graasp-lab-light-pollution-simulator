@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles/index';
 import Tree from '../svgs/Tree';
 import House from '../svgs/House';
+import Hill from '../svgs/Hill';
 import LampPosts from './LampPosts';
 import { addLampPost } from '../../actions';
 import { BUFFER_WIDTH, MAX_LAMP_POSTS, SKY_COLOR } from '../../config/settings';
@@ -38,6 +39,12 @@ class Canvas extends Component {
       scaleX: 0.25,
       scaleY: 0.25,
     },
+    hill: {
+      x: 0,
+      y: 0,
+      scaleX: 1.0,
+      scaleY: 1.0,
+    },
   };
 
   static propTypes = {
@@ -50,7 +57,7 @@ class Canvas extends Component {
 
   componentDidMount() {
     const scale = this.calculateScale();
-    const { house, tree, height, width } = this.state;
+    const { house, tree, hill, height, width } = this.state;
     const newHouse = {
       ...house,
       scaleX: 1.7 * scale,
@@ -62,11 +69,18 @@ class Canvas extends Component {
       ...tree,
       scaleX: scale,
       scaleY: 1.3 * scale,
-      y: height - 410,
-      x: width - 500,
+      y: height - 490,
+      x: width - 410,
+    };
+    const newHill = {
+      ...hill,
+      scaleX: 2.3 * scale,
+      scaleY: 1.5 * scale,
+      y: height - 280,
+      x: width - 600,
     };
 
-    this.setState({ house: newHouse, tree: newTree });
+    this.setState({ house: newHouse, tree: newTree, hill: newHill });
   }
 
   /**
@@ -121,7 +135,7 @@ class Canvas extends Component {
   };
 
   render() {
-    const { house, tree } = this.state;
+    const { house, tree, hill } = this.state;
 
     const { classes } = this.props;
 
@@ -148,6 +162,12 @@ class Canvas extends Component {
                     y={tree.y}
                     scaleX={tree.scaleX}
                     scaleY={tree.scaleY}
+                  />
+                  <Hill
+                    x={hill.x}
+                    y={hill.y}
+                    scaleX={hill.scaleX}
+                    scaleY={hill.scaleY}
                   />
                   <LampPosts />
                 </Layer>
