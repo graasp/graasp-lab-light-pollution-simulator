@@ -5,6 +5,7 @@ import { Stage, Layer } from 'react-konva';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles/index';
 import Tree from '../svgs/Tree';
+import House from '../svgs/House';
 import LampPosts from './LampPosts';
 import { addLampPost } from '../../actions';
 import { BUFFER_WIDTH, MAX_LAMP_POSTS, SKY_COLOR } from '../../config/settings';
@@ -25,9 +26,15 @@ class Canvas extends Component {
   state = {
     height: window.innerHeight,
     width: window.innerWidth,
+    house: {
+      x: 0,
+      y: 0,
+      scaleX: 0.9,
+      scaleY: 0.5,
+    },
     tree: {
       x: 100,
-      y: 100,
+      y: 120,
       scaleX: 0.25,
       scaleY: 0.25,
     },
@@ -43,16 +50,23 @@ class Canvas extends Component {
 
   componentDidMount() {
     const scale = this.calculateScale();
-    const { tree, height, width } = this.state;
+    const { house, tree, height, width } = this.state;
+    const newHouse = {
+      ...house,
+      scaleX: 1.7 * scale,
+      scaleY: 1.6 * scale,
+      y: height - 376,
+      x: height - 900,
+    };
     const newTree = {
       ...tree,
       scaleX: scale,
-      scaleY: scale,
-      y: height - 350,
+      scaleY: 1.3 * scale,
+      y: height - 410,
       x: width - 500,
     };
 
-    this.setState({ tree: newTree });
+    this.setState({ house: newHouse, tree: newTree });
   }
 
   /**
@@ -107,7 +121,7 @@ class Canvas extends Component {
   };
 
   render() {
-    const { tree } = this.state;
+    const { house, tree } = this.state;
 
     const { classes } = this.props;
 
@@ -123,6 +137,12 @@ class Canvas extends Component {
               <Provider store={store}>
                 <Layer>
                   <Stars />
+                  <House
+                    x={house.x}
+                    y={house.y}
+                    scaleX={house.scaleX}
+                    scaleY={house.scaleY}
+                  />
                   <Tree
                     x={tree.x}
                     y={tree.y}
