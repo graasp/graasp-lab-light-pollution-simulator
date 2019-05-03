@@ -121,9 +121,7 @@ class Canvas extends Component {
   };
 
   render() {
-    const { house } = this.state;
-
-    const { tree } = this.state;
+    const { house, tree } = this.state;
 
     const { classes } = this.props;
 
