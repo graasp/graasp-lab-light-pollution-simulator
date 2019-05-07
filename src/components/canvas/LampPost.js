@@ -31,7 +31,7 @@ class LampPost extends Component {
   };
 
   static defaultProps = {
-    stroke: 'black',
+    stroke: '#2f2f2f',
     size: SIZE_LARGE,
     shielding: 'none',
   };

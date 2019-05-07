@@ -7,6 +7,12 @@ import { withStyles } from '@material-ui/core/styles/index';
 import Tree from '../svgs/Tree';
 import House from '../svgs/House';
 import Hill from '../svgs/Hill';
+import BushTypeA from '../svgs/BushTypeA';
+import BushTypeB from '../svgs/BushTypeB';
+import GrassTypeA from '../svgs/GrassTypeA';
+import GrassTypeB from '../svgs/GrassTypeB';
+import GrassTypeC from '../svgs/GrassTypeC';
+import GrassTypeD from '../svgs/GrassTypeD';
 import LampPosts from './LampPosts';
 import { addLampPost } from '../../actions';
 import { BUFFER_WIDTH, MAX_LAMP_POSTS, SKY_COLOR } from '../../config/settings';
@@ -45,6 +51,48 @@ class Canvas extends Component {
       scaleX: 1.0,
       scaleY: 1.0,
     },
+    bushTypeA: {
+      x: 0,
+      y: 0,
+      scaleX: 0.1,
+      scaleY: 0.1,
+    },
+    bushTypeB: {
+      x: 0,
+      y: 0,
+      scaleX: 0.1,
+      scaleY: 0.1,
+    },
+    grassTypeAItem1: {
+      x: 0,
+      y: 0,
+      scaleX: 1.0,
+      scaley: 1.0,
+    },
+    grassTypeAItem2: {
+      x: 0,
+      y: 0,
+      scaleX: 1.0,
+      scaley: 1.0,
+    },
+    grassTypeB: {
+      x: 0,
+      y: 0,
+      scaleX: 1.0,
+      scaley: 1.0,
+    },
+    grassTypeC: {
+      x: 0,
+      y: 0,
+      scaleX: 1.0,
+      scaley: 1.0,
+    },
+    grassTypeD: {
+      x: 0,
+      y: 0,
+      scaleX: 1.0,
+      scaley: 1.0,
+    },
   };
 
   static propTypes = {
@@ -57,30 +105,103 @@ class Canvas extends Component {
 
   componentDidMount() {
     const scale = this.calculateScale();
-    const { house, tree, hill, height, width } = this.state;
+    const {
+      house,
+      tree,
+      hill,
+      bushTypeA,
+      bushTypeB,
+      grassTypeAItem1,
+      grassTypeAItem2,
+      grassTypeB,
+      grassTypeC,
+      grassTypeD,
+      height,
+      width,
+    } = this.state;
     const newHouse = {
       ...house,
-      scaleX: 1.7 * scale,
-      scaleY: 1.6 * scale,
-      y: height - 376,
-      x: height - 900,
+      scaleX: 1.8 * scale,
+      scaleY: 1.9 * scale,
+      y: height - 480,
+      x: width - 1935,
     };
     const newTree = {
       ...tree,
       scaleX: scale,
       scaleY: 1.3 * scale,
-      y: height - 490,
+      y: height - 552,
       x: width - 410,
     };
     const newHill = {
       ...hill,
       scaleX: 2.3 * scale,
       scaleY: 1.5 * scale,
-      y: height - 280,
+      y: height - 330,
       x: width - 600,
     };
+    const newBushTypeA = {
+      ...bushTypeA,
+      scaleX: 0.8 * scale,
+      scaleY: 0.5 * scale,
+      y: height - 200,
+      x: width - 1950,
+    };
+    const newBushTypeB = {
+      ...bushTypeB,
+      scaleX: 0.2 * scale,
+      scaleY: 0.2 * scale,
+      y: height - 177,
+      x: width - 505,
+    };
+    const newGrassTypeAItem1 = {
+      ...grassTypeAItem1,
+      scaleX: 0.12 * scale,
+      scaleY: 0.12 * scale,
+      y: height - 200,
+      x: width - 425,
+    };
+    const newGrassTypeAItem2 = {
+      ...grassTypeAItem2,
+      scaleX: 0.12 * scale,
+      scaleY: 0.12 * scale,
+      y: height - 255,
+      x: width - 260,
+    };
+    const newGrassTypeB = {
+      ...grassTypeB,
+      scaleX: 0.15 * scale,
+      scaleY: 0.15 * scale,
+      y: height - 183,
+      x: width - 1470,
+    };
+    const newGrassTypeC = {
+      ...grassTypeC,
+      scaleX: 0.15 * scale,
+      scaleY: 0.15 * scale,
+      y: height - 225,
+      x: width - 45,
+    };
+    const newGrassTypeD = {
+      ...grassTypeD,
+      scaleX: 0.25 * scale,
+      scaleY: 0.2 * scale,
+      y: height - 243,
+      x: width - 255,
+    };
 
-    this.setState({ house: newHouse, tree: newTree, hill: newHill });
+    this.setState({
+      house: newHouse,
+      tree: newTree,
+      hill: newHill,
+      bushTypeA: newBushTypeA,
+      bushTypeB: newBushTypeB,
+      grassTypeAItem1: newGrassTypeAItem1,
+      grassTypeAItem2: newGrassTypeAItem2,
+      grassTypeB: newGrassTypeB,
+      grassTypeC: newGrassTypeC,
+      grassTypeD: newGrassTypeD,
+    });
   }
 
   /**
@@ -135,7 +256,18 @@ class Canvas extends Component {
   };
 
   render() {
-    const { house, tree, hill } = this.state;
+    const {
+      house,
+      tree,
+      hill,
+      bushTypeA,
+      bushTypeB,
+      grassTypeAItem1,
+      grassTypeAItem2,
+      grassTypeB,
+      grassTypeC,
+      grassTypeD,
+    } = this.state;
 
     const { classes } = this.props;
 
@@ -145,7 +277,7 @@ class Canvas extends Component {
           {({ store }) => (
             <Stage
               width={window.innerWidth}
-              height={window.innerHeight - 100}
+              height={window.innerHeight - 150}
               onClick={this.handleClick}
             >
               <Provider store={store}>
@@ -168,6 +300,48 @@ class Canvas extends Component {
                     y={hill.y}
                     scaleX={hill.scaleX}
                     scaleY={hill.scaleY}
+                  />
+                  <BushTypeA
+                    x={bushTypeA.x}
+                    y={bushTypeA.y}
+                    scaleX={bushTypeA.scaleX}
+                    scaleY={bushTypeA.scaleY}
+                  />
+                  <BushTypeB
+                    x={bushTypeB.x}
+                    y={bushTypeB.y}
+                    scaleX={bushTypeB.scaleX}
+                    scaleY={bushTypeB.scaleY}
+                  />
+                  <GrassTypeA
+                    x={grassTypeAItem1.x}
+                    y={grassTypeAItem1.y}
+                    scaleX={grassTypeAItem1.scaleX}
+                    scaleY={grassTypeAItem1.scaleY}
+                  />
+                  <GrassTypeA
+                    x={grassTypeAItem2.x}
+                    y={grassTypeAItem2.y}
+                    scaleX={grassTypeAItem2.scaleX}
+                    scaleY={grassTypeAItem2.scaleY}
+                  />
+                  <GrassTypeB
+                    x={grassTypeB.x}
+                    y={grassTypeB.y}
+                    scaleX={grassTypeB.scaleX}
+                    scaleY={grassTypeB.scaleY}
+                  />
+                  <GrassTypeC
+                    x={grassTypeC.x}
+                    y={grassTypeC.y}
+                    scaleX={grassTypeC.scaleX}
+                    scaleY={grassTypeC.scaleY}
+                  />
+                  <GrassTypeD
+                    x={grassTypeD.x}
+                    y={grassTypeD.y}
+                    scaleX={grassTypeD.scaleX}
+                    scaleY={grassTypeD.scaleY}
                   />
                   <LampPosts />
                 </Layer>
