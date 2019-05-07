@@ -4,7 +4,7 @@ import LampPost from './LampPost';
 
 const LampPosts = ({ lampPosts }) => {
   return lampPosts.map(({ x, size, shielding }) => (
-    <LampPost y={600} x={x} size={size} key={x} shielding={shielding} />
+    <LampPost y={770} x={x} size={size} key={x} shielding={shielding} />
   ));
 };
 
