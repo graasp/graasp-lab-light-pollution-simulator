@@ -16,7 +16,12 @@ import LampPosts from './LampPosts';
 import Moon from '../svgs/Moon';
 import Tree from '../svgs/Tree';
 import { addLampPost } from '../../actions';
-import { BUFFER_WIDTH, MAX_LAMP_POSTS, SKY_COLOR } from '../../config/settings';
+import {
+  BUFFER_WIDTH,
+  FOOTER_HEIGHT,
+  MAX_LAMP_POSTS,
+  SKY_COLOR,
+} from '../../config/settings';
 import { showErrorToast } from '../../utils/toasts';
 import {
   LAMP_POST_TOO_CLOSE_MESSAGE,
@@ -294,7 +299,7 @@ class Canvas extends Component {
           {({ store }) => (
             <Stage
               width={window.innerWidth}
-              height={window.innerHeight - 150}
+              height={window.innerHeight - FOOTER_HEIGHT}
               onClick={this.handleClick}
             >
               <Provider store={store}>
