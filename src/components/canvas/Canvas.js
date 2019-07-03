@@ -4,18 +4,24 @@ import { connect, ReactReduxContext, Provider } from 'react-redux';
 import { Stage, Layer } from 'react-konva';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles/index';
-import Tree from '../svgs/Tree';
-import House from '../svgs/House';
-import Hill from '../svgs/Hill';
 import BushTypeA from '../svgs/BushTypeA';
 import BushTypeB from '../svgs/BushTypeB';
 import GrassTypeA from '../svgs/GrassTypeA';
 import GrassTypeB from '../svgs/GrassTypeB';
 import GrassTypeC from '../svgs/GrassTypeC';
 import GrassTypeD from '../svgs/GrassTypeD';
+import Hill from '../svgs/Hill';
+import House from '../svgs/House';
 import LampPosts from './LampPosts';
+import Moon from '../svgs/Moon';
+import Tree from '../svgs/Tree';
 import { addLampPost } from '../../actions';
-import { BUFFER_WIDTH, MAX_LAMP_POSTS, SKY_COLOR } from '../../config/settings';
+import {
+  BUFFER_WIDTH,
+  FOOTER_HEIGHT,
+  MAX_LAMP_POSTS,
+  SKY_COLOR,
+} from '../../config/settings';
 import { showErrorToast } from '../../utils/toasts';
 import {
   LAMP_POST_TOO_CLOSE_MESSAGE,
@@ -33,24 +39,6 @@ class Canvas extends Component {
   state = {
     height: window.innerHeight,
     width: window.innerWidth,
-    house: {
-      x: 0,
-      y: 0,
-      scaleX: 0.9,
-      scaleY: 0.5,
-    },
-    tree: {
-      x: 100,
-      y: 120,
-      scaleX: 0.25,
-      scaleY: 0.25,
-    },
-    hill: {
-      x: 0,
-      y: 0,
-      scaleX: 1.0,
-      scaleY: 1.0,
-    },
     bushTypeA: {
       x: 0,
       y: 0,
@@ -93,6 +81,30 @@ class Canvas extends Component {
       scaleX: 1.0,
       scaley: 1.0,
     },
+    hill: {
+      x: 0,
+      y: 0,
+      scaleX: 1.0,
+      scaleY: 1.0,
+    },
+    house: {
+      x: 0,
+      y: 0,
+      scaleX: 0.9,
+      scaleY: 0.5,
+    },
+    moon: {
+      x: 0,
+      y: 0,
+      scaleX: 1.0,
+      scaleY: 1.0,
+    },
+    tree: {
+      x: 100,
+      y: 120,
+      scaleX: 0.25,
+      scaleY: 0.25,
+    },
   };
 
   static propTypes = {
@@ -106,9 +118,6 @@ class Canvas extends Component {
   componentDidMount() {
     const scale = this.calculateScale();
     const {
-      house,
-      tree,
-      hill,
       bushTypeA,
       bushTypeB,
       grassTypeAItem1,
@@ -116,30 +125,13 @@ class Canvas extends Component {
       grassTypeB,
       grassTypeC,
       grassTypeD,
-      height,
+      hill,
+      house,
+      moon,
+      tree,
       width,
+      height,
     } = this.state;
-    const newHouse = {
-      ...house,
-      scaleX: 1.8 * scale,
-      scaleY: 1.9 * scale,
-      y: height - 480,
-      x: width - 1935,
-    };
-    const newTree = {
-      ...tree,
-      scaleX: scale,
-      scaleY: 1.3 * scale,
-      y: height - 552,
-      x: width - 410,
-    };
-    const newHill = {
-      ...hill,
-      scaleX: 2.3 * scale,
-      scaleY: 1.5 * scale,
-      y: height - 330,
-      x: width - 600,
-    };
     const newBushTypeA = {
       ...bushTypeA,
       scaleX: 0.8 * scale,
@@ -189,11 +181,36 @@ class Canvas extends Component {
       y: height - 243,
       x: width - 255,
     };
+    const newHill = {
+      ...hill,
+      scaleX: 2.3 * scale,
+      scaleY: 1.5 * scale,
+      y: height - 330,
+      x: width - 600,
+    };
+    const newHouse = {
+      ...house,
+      scaleX: 1.8 * scale,
+      scaleY: 1.9 * scale,
+      y: height - 480,
+      x: width - 1935,
+    };
+    const newMoon = {
+      ...moon,
+      scaleX: 3.0 * scale,
+      scaleY: 3.0 * scale,
+      y: height - 790,
+      x: width - 650,
+    };
+    const newTree = {
+      ...tree,
+      scaleX: scale,
+      scaleY: 1.3 * scale,
+      y: height - 552,
+      x: width - 410,
+    };
 
     this.setState({
-      house: newHouse,
-      tree: newTree,
-      hill: newHill,
       bushTypeA: newBushTypeA,
       bushTypeB: newBushTypeB,
       grassTypeAItem1: newGrassTypeAItem1,
@@ -201,6 +218,10 @@ class Canvas extends Component {
       grassTypeB: newGrassTypeB,
       grassTypeC: newGrassTypeC,
       grassTypeD: newGrassTypeD,
+      hill: newHill,
+      house: newHouse,
+      moon: newMoon,
+      tree: newTree,
     });
   }
 
@@ -257,9 +278,6 @@ class Canvas extends Component {
 
   render() {
     const {
-      house,
-      tree,
-      hill,
       bushTypeA,
       bushTypeB,
       grassTypeAItem1,
@@ -267,6 +285,10 @@ class Canvas extends Component {
       grassTypeB,
       grassTypeC,
       grassTypeD,
+      hill,
+      house,
+      moon,
+      tree,
     } = this.state;
 
     const { classes } = this.props;
@@ -277,30 +299,11 @@ class Canvas extends Component {
           {({ store }) => (
             <Stage
               width={window.innerWidth}
-              height={window.innerHeight - 150}
+              height={window.innerHeight - FOOTER_HEIGHT}
               onClick={this.handleClick}
             >
               <Provider store={store}>
                 <Layer>
-                  <Stars />
-                  <House
-                    x={house.x}
-                    y={house.y}
-                    scaleX={house.scaleX}
-                    scaleY={house.scaleY}
-                  />
-                  <Tree
-                    x={tree.x}
-                    y={tree.y}
-                    scaleX={tree.scaleX}
-                    scaleY={tree.scaleY}
-                  />
-                  <Hill
-                    x={hill.x}
-                    y={hill.y}
-                    scaleX={hill.scaleX}
-                    scaleY={hill.scaleY}
-                  />
                   <BushTypeA
                     x={bushTypeA.x}
                     y={bushTypeA.y}
@@ -343,7 +346,32 @@ class Canvas extends Component {
                     scaleX={grassTypeD.scaleX}
                     scaleY={grassTypeD.scaleY}
                   />
+                  <Hill
+                    x={hill.x}
+                    y={hill.y}
+                    scaleX={hill.scaleX}
+                    scaleY={hill.scaleY}
+                  />
+                  <House
+                    x={house.x}
+                    y={house.y}
+                    scaleX={house.scaleX}
+                    scaleY={house.scaleY}
+                  />
                   <LampPosts />
+                  <Moon
+                    x={moon.x}
+                    y={moon.y}
+                    scaleX={moon.scaleX}
+                    scaleY={moon.scaleY}
+                  />
+                  <Stars />
+                  <Tree
+                    x={tree.x}
+                    y={tree.y}
+                    scaleX={tree.scaleX}
+                    scaleY={tree.scaleY}
+                  />
                 </Layer>
               </Provider>
             </Stage>

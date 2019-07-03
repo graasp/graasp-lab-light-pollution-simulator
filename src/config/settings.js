@@ -1,5 +1,8 @@
 import { LOCAL_API_HOST } from './api';
 
+// footer
+export const FOOTER_HEIGHT = 150;
+
 // lamp post
 export const DEFAULT_SIZE = 'large';
 export const DEFAULT_COLOR_TEXT = 'yellow';
