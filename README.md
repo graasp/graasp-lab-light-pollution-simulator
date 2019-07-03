@@ -65,9 +65,7 @@ AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>
 
 ## Installing Dependencies
 
-Make sure you have `node` and `yarn` installed on your local machine otherwise go
-[here](https://changelog.com/posts/install-node-js-with-homebrew-on-os-x) and install them;
-then run `yarn` from the project directory to install all dependencies.
+This lab depends on `yarn`, `node` and `git`.
 
 ## Starting the Server
 
