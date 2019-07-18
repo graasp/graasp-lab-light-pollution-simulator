@@ -37,73 +37,73 @@ class Canvas extends Component {
   };
 
   state = {
-    height: window.innerHeight,
     width: window.innerWidth,
+    height: window.innerHeight,
     bushTypeA: {
       x: 0,
       y: 0,
-      scaleX: 0.1,
-      scaleY: 0.1,
+      // scaleX: 0.1,
+      // scaleY: 0.1,
     },
     bushTypeB: {
       x: 0,
       y: 0,
-      scaleX: 0.1,
-      scaleY: 0.1,
+      // scaleX: 0.1,
+      // scaleY: 0.1,
     },
     grassTypeAItem1: {
       x: 0,
       y: 0,
-      scaleX: 1.0,
-      scaley: 1.0,
+      // scaleX: 0.1,
+      // scaleY: 0.1,
     },
     grassTypeAItem2: {
       x: 0,
       y: 0,
-      scaleX: 1.0,
-      scaley: 1.0,
+      // scaleX: 0.1,
+      // scaleY: 0.1,
     },
     grassTypeB: {
       x: 0,
       y: 0,
-      scaleX: 1.0,
-      scaley: 1.0,
+      // scaleX: 0.1,
+      // scaleY: 0.1,
     },
     grassTypeC: {
       x: 0,
       y: 0,
-      scaleX: 1.0,
-      scaley: 1.0,
+      // scaleX: 0.1,
+      // scaleY: 0.1,
     },
     grassTypeD: {
       x: 0,
       y: 0,
-      scaleX: 1.0,
-      scaley: 1.0,
+      // scaleX: 0.1,
+      // scaleY: 0.1,
     },
     hill: {
       x: 0,
       y: 0,
-      scaleX: 1.0,
-      scaleY: 1.0,
+      // scaleX: 0.1,
+      // scaleY: 0.1,
     },
     house: {
-      x: 0,
-      y: 0,
-      scaleX: 0.9,
-      scaleY: 0.5,
+      // x: 0,
+      // y: 0,
+      // scaleX: 0.1,
+      // scaleY: 0.1,
     },
     moon: {
       x: 0,
       y: 0,
-      scaleX: 1.0,
-      scaleY: 1.0,
+      // scaleX: 0.1,
+      // scaleY: 0.1,
     },
     tree: {
-      x: 100,
-      y: 120,
-      scaleX: 0.25,
-      scaleY: 0.25,
+      x: 0, // 100
+      y: 0, // 120
+      // scaleX: 0.1,
+      // scaleY: 0.1,
     },
   };
 
@@ -133,81 +133,81 @@ class Canvas extends Component {
       height,
     } = this.state;
     const newBushTypeA = {
-      ...bushTypeA,
+      ...bushTypeA, // on the left of the house
       scaleX: 0.8 * scale,
       scaleY: 0.5 * scale,
-      y: height - 200,
-      x: width - 1950,
+      x: 1e-5 * width,
+      y: 0.75 * height,
     };
     const newBushTypeB = {
-      ...bushTypeB,
+      ...bushTypeB, // on the left base of the hill
       scaleX: 0.2 * scale,
       scaleY: 0.2 * scale,
-      y: height - 177,
-      x: width - 505,
+      x: 0.72 * width,
+      y: 0.771 * height,
     };
     const newGrassTypeAItem1 = {
-      ...grassTypeAItem1,
+      ...grassTypeAItem1, // on the left of the hill, highest of the two
       scaleX: 0.12 * scale,
       scaleY: 0.12 * scale,
-      y: height - 200,
-      x: width - 425,
+      x: 0.76 * width,
+      y: 0.745 * height,
     };
     const newGrassTypeAItem2 = {
-      ...grassTypeAItem2,
+      ...grassTypeAItem2, // at the bottom of the tree, on the left tip of the horizontal grass
       scaleX: 0.12 * scale,
       scaleY: 0.12 * scale,
-      y: height - 255,
-      x: width - 260,
+      x: 0.885 * width,
+      y: 0.668 * height,
     };
     const newGrassTypeB = {
-      ...grassTypeB,
+      ...grassTypeB, // on the porch of the house
       scaleX: 0.15 * scale,
       scaleY: 0.15 * scale,
-      y: height - 183,
-      x: width - 1470,
+      x: 0.25 * width,
+      y: 0.762 * height,
     };
     const newGrassTypeC = {
-      ...grassTypeC,
+      ...grassTypeC, // rightmost grass, on the hill
       scaleX: 0.15 * scale,
       scaleY: 0.15 * scale,
-      y: height - 225,
-      x: width - 45,
+      x: 0.97 * width,
+      y: 0.7 * height,
     };
     const newGrassTypeD = {
-      ...grassTypeD,
+      ...grassTypeD, // on the base of the tree
       scaleX: 0.25 * scale,
       scaleY: 0.2 * scale,
-      y: height - 243,
-      x: width - 255,
+      x: 0.89 * width,
+      y: 0.685 * height,
     };
     const newHill = {
       ...hill,
       scaleX: 2.3 * scale,
       scaleY: 1.5 * scale,
-      y: height - 330,
-      x: width - 600,
+      x: 0.7 * width,
+      y: 0.6 * height,
     };
     const newHouse = {
       ...house,
-      scaleX: 1.8 * scale,
-      scaleY: 1.9 * scale,
-      y: height - 480,
-      x: width - 1935,
+      scaleX: 2.0 * scale,
+      scaleY: 1.6 * scale,
+      x: 0.001 * width,
+      y: 0.506 * height,
     };
     const newMoon = {
       ...moon,
       scaleX: 3.0 * scale,
       scaleY: 3.0 * scale,
-      y: height - 790,
-      x: width - 650,
+      x: 0.65 * width,
+      y: 0.15 * height,
     };
     const newTree = {
       ...tree,
-      scaleX: scale,
-      scaleY: 1.3 * scale,
-      y: height - 552,
-      x: width - 410,
+      scaleX: 1.1 * scale,
+      scaleY: 1.2 * scale,
+      x: 0.8 * width,
+      y: 0.4 * height,
     };
 
     this.setState({

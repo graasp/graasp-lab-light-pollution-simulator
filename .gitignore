@@ -40,3 +40,6 @@ cypress
 
 # exclude local database
 db.json
+
+# exclude directory files
+.directory
