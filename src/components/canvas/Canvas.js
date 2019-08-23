@@ -13,7 +13,7 @@ import GrassTypeD from '../svgs/GrassTypeD';
 import Hill from '../svgs/Hill';
 import House from '../svgs/House';
 import LampPosts from './LampPosts';
-import Moon from '../svgs/Moon';
+import CrescentMoon from '../svgs/CrescentMoon';
 import Tree from '../svgs/Tree';
 import { addLampPost } from '../../actions';
 import {
@@ -359,7 +359,7 @@ class Canvas extends Component {
                     scaleY={house.scaleY}
                   />
                   <LampPosts />
-                  <Moon
+                  <CrescentMoon
                     x={moon.x}
                     y={moon.y}
                     scaleX={moon.scaleX}
