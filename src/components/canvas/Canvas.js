@@ -13,11 +13,12 @@ import GrassTypeD from '../svgs/GrassTypeD';
 import Hill from '../svgs/Hill';
 import House from '../svgs/House';
 import LampPosts from './LampPosts';
-import CrescentMoon from '../svgs/CrescentMoon';
+import Moon from './Moon';
 import Tree from '../svgs/Tree';
 import { addLampPost } from '../../actions';
 import {
   BUFFER_WIDTH,
+  CRESCENT_MOON,
   FOOTER_HEIGHT,
   MAX_LAMP_POSTS,
   SKY_COLOR,
@@ -195,12 +196,15 @@ class Canvas extends Component {
       x: 0.001 * width,
       y: 0.506 * height,
     };
+    // we need to know moon width to calculate the position of its halo
     const newMoon = {
       ...moon,
       scaleX: 3.0 * scale,
       scaleY: 3.0 * scale,
       x: 0.65 * width,
       y: 0.15 * height,
+      width: scale * 3.0 * 100,
+      height: scale * 3.0 * 400,
     };
     const newTree = {
       ...tree,
@@ -359,12 +363,7 @@ class Canvas extends Component {
                     scaleY={house.scaleY}
                   />
                   <LampPosts />
-                  <CrescentMoon
-                    x={moon.x}
-                    y={moon.y}
-                    scaleX={moon.scaleX}
-                    scaleY={moon.scaleY}
-                  />
+                  <Moon phase={CRESCENT_MOON} moon={moon} />
                   <Stars />
                   <Tree
                     x={tree.x}
