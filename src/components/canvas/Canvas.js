@@ -240,8 +240,19 @@ class Canvas extends Component {
     return factor / height;
   };
 
+  isInBottomHalf = clientY => {
+    const { height } = this.state;
+    return clientY > height / 2;
+  };
+
   handleClick = ({ evt, target }) => {
-    const { clientX } = evt;
+    const { clientX, clientY } = evt;
+
+    // commands after this check only apply to the bottom half of the canvas
+    if (!this.isInBottomHalf(clientY)) {
+      return false;
+    }
+
     const { dispatchAddLampPost, lampPosts, lampPostActivity } = this.props;
 
     // do not consider clicks on the lamp posts
