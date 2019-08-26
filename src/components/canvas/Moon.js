@@ -10,8 +10,8 @@ const Moon = ({ phase, moon }) => {
       return (
         <>
           <MoonHalo
-            x={moon.x + 0.5 * moon.width}
-            y={moon.y + 0.5 * moon.height}
+            x={moon.x + 0.25 * moon.width}
+            y={moon.y + 0.18 * moon.height}
             phase={CRESCENT_MOON}
           />
           <CrescentMoon
@@ -27,8 +27,8 @@ const Moon = ({ phase, moon }) => {
       return (
         <>
           <MoonHalo
-            x={moon.x + 0.5 * moon.width}
-            y={moon.y + 0.5 * moon.height}
+            x={moon.x + 0.35 * moon.width}
+            y={moon.y + 0.18 * moon.height}
             phase={FULL_MOON}
           />
           <CrescentMoon
