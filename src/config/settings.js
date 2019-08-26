@@ -16,6 +16,12 @@ export const FULL_SHIELDING = 'full';
 export const HALF_SHIELDING = 'half';
 export const NO_SHIELDING = 'none';
 
+// moon
+export const DEFAULT_COLOR_MOON_RGBA = 'rgba(0, 0, 0, 1)';
+export const CRESCENT_MOON = 'CRESCENT_MOON';
+export const FULL_MOON = 'FULL_MOON';
+export const NUM_ITERATIONS_TO_SKIP = 10;
+
 // reference dimensions
 export const FOOTER_HEIGHT = Math.round(0.2 * window.innerHeight);
 export const HOUSE_HEIGHT = Math.round(0.35 * window.innerHeight);

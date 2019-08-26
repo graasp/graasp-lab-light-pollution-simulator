@@ -32,6 +32,8 @@ const Halo = ({ size, x, y, shielding }) => {
   return Array(NUM_CIRCLES_IN_HALO)
     .fill()
     .map((e, i) => {
+      // emulating the law of inverse square,
+      // but actually exponentiating to one
       const color = `rgba(248, 148, 6, ${1 / (i + 1) ** 1})`;
       const shadowBlur = 5;
       const shadowOpacity = 0.1;
@@ -51,8 +53,6 @@ const Halo = ({ size, x, y, shielding }) => {
               outerRadius={calculateRadius() + i * RADIUS_WIDTH_FACTOR}
               angle={100}
               rotation={40}
-              // emulating the law of inverse square,
-              // but actually exponentiating to one
               shadowColor={color}
               shadowBlur={shadowBlur}
               shadowOpacity={shadowOpacity}
@@ -76,8 +76,6 @@ const Halo = ({ size, x, y, shielding }) => {
               innerRadius={0}
               outerRadius={calculateRadius() + i * RADIUS_WIDTH_FACTOR}
               angle={180}
-              // emulating the law of inverse square,
-              // but actually exponentiating to one
               shadowColor={color}
               shadowBlur={shadowBlur}
               shadowOpacity={shadowOpacity}
@@ -100,8 +98,6 @@ const Halo = ({ size, x, y, shielding }) => {
               }
               radius={calculateRadius() + i * RADIUS_WIDTH_FACTOR}
               fill={DEFAULT_COLOR_RGBA}
-              // emulating the law of inverse square,
-              // but actually exponentiating to one
               shadowColor={color}
               shadowBlur={shadowBlur}
               shadowOpacity={shadowOpacity}
