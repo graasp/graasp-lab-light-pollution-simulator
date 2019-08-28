@@ -22,10 +22,12 @@ QuarterMoon.propTypes = {
   scaleX: PropTypes.number.isRequired,
   scaleY: PropTypes.number.isRequired,
   fill: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 QuarterMoon.defaultProps = {
   fill: 'lightgray',
+  onClick: () => {},
 };
 
 export default QuarterMoon;

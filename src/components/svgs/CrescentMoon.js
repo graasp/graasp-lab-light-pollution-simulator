@@ -22,10 +22,12 @@ CrescentMoon.propTypes = {
   scaleX: PropTypes.number.isRequired,
   scaleY: PropTypes.number.isRequired,
   fill: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 CrescentMoon.defaultProps = {
   fill: 'lightgray',
+  onClick: () => {},
 };
 
 export default CrescentMoon;

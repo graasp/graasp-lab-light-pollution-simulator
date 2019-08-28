@@ -22,10 +22,12 @@ NewMoon.propTypes = {
   scaleX: PropTypes.number.isRequired,
   scaleY: PropTypes.number.isRequired,
   fill: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 NewMoon.defaultProps = {
   fill: '#333232',
+  onClick: () => {},
 };
 
 export default NewMoon;

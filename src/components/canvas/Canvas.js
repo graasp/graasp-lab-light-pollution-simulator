@@ -20,9 +20,6 @@ import {
   BUFFER_WIDTH,
   CRESCENT_MOON,
   FOOTER_HEIGHT,
-  FULL_MOON,
-  NEW_MOON,
-  QUARTER_MOON,
   MAX_LAMP_POSTS,
   SKY_COLOR,
 } from '../../config/settings';

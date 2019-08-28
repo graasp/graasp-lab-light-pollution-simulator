@@ -5,6 +5,7 @@ import users from './users';
 import appInstance from './appInstance';
 import settings from './settings';
 import lampPost from './lampPost';
+import moon from './moon';
 
 export default combineReducers({
   // keys should always be lowercase
@@ -14,4 +15,5 @@ export default combineReducers({
   appInstance,
   settings,
   lampPost,
+  moon,
 });

@@ -22,10 +22,12 @@ FullMoon.propTypes = {
   scaleX: PropTypes.number.isRequired,
   scaleY: PropTypes.number.isRequired,
   fill: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 FullMoon.defaultProps = {
   fill: 'lightgray',
+  onClick: () => {},
 };
 
 export default FullMoon;
