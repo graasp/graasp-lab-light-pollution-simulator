@@ -41,7 +41,12 @@ const getAppInstanceResources = async ({
 } = {}) => async (dispatch, getState) => {
   dispatch(flagGettingAppInstanceResources(true));
   try {
-    const { appInstanceId, apiHost } = getApiContext(getState);
+    const { appInstanceId, apiHost, standalone } = getApiContext(getState);
+
+    // if standalone, you cannot connect to api
+    if (standalone) {
+      return false;
+    }
 
     let url = `//${apiHost +
       APP_INSTANCE_RESOURCES_ENDPOINT}?appInstanceId=${appInstanceId}`;
@@ -83,7 +88,12 @@ const postAppInstanceResource = async ({ data, userId } = {}) => async (
 ) => {
   dispatch(flagPostingAppInstanceResource(true));
   try {
-    const { appInstanceId, apiHost } = await getApiContext(getState);
+    const { appInstanceId, apiHost, standalone } = getApiContext(getState);
+
+    // if standalone, you cannot connect to api
+    if (standalone) {
+      return false;
+    }
 
     const url = `//${apiHost + APP_INSTANCE_RESOURCES_ENDPOINT}`;
 
@@ -125,7 +135,12 @@ const patchAppInstanceResource = async ({ id, data } = {}) => async (
 ) => {
   dispatch(flagPatchingAppInstanceResource(true));
   try {
-    const { apiHost } = await getApiContext(getState);
+    const { apiHost, standalone } = getApiContext(getState);
+
+    // if standalone, you cannot connect to api
+    if (standalone) {
+      return false;
+    }
 
     if (!id) {
       return showErrorToast(MISSING_APP_INSTANCE_RESOURCE_ID_MESSAGE);
@@ -164,7 +179,12 @@ const patchAppInstanceResource = async ({ id, data } = {}) => async (
 const deleteAppInstanceResource = async id => async (dispatch, getState) => {
   dispatch(flagDeletingAppInstanceResource(true));
   try {
-    const { apiHost } = await getApiContext(getState);
+    const { apiHost, standalone } = getApiContext(getState);
+
+    // if standalone, you cannot connect to api
+    if (standalone) {
+      return false;
+    }
 
     if (!id) {
       return showErrorToast(MISSING_APP_INSTANCE_RESOURCE_ID_MESSAGE);

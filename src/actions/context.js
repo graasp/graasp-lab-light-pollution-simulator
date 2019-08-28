@@ -16,6 +16,7 @@ const flagGettingContext = flag(FLAG_GETTING_CONTEXT);
  */
 const getContext = () => dispatch => {
   dispatch(flagGettingContext(true));
+
   try {
     const {
       mode = 'default',
@@ -26,6 +27,7 @@ const getContext = () => dispatch => {
       subSpaceId = null,
       userId = null,
       sessionId = null,
+      dev = false,
     } = Qs.parse(window.location.search, { ignoreQueryPrefix: true });
     const context = {
       mode,
@@ -36,6 +38,7 @@ const getContext = () => dispatch => {
       sessionId,
       spaceId,
       subSpaceId,
+      dev,
     };
     dispatch({
       type: GET_CONTEXT_SUCCEEDED,

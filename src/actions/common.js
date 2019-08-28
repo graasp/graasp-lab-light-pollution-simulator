@@ -4,6 +4,7 @@ import {
   MISSING_SPACE_ID_MESSAGE,
   UNEXPECTED_ERROR_MESSAGE,
 } from '../constants/messages';
+import isInFrame from '../utils/isInFrame';
 
 const flag = type => payload => dispatch =>
   dispatch({
@@ -28,7 +29,14 @@ const isErrorResponse = async response => {
 
 const getApiContext = getState => {
   const { context } = getState();
-  const { apiHost, appInstanceId, spaceId } = context;
+  const { apiHost, appInstanceId, spaceId, dev } = context;
+
+  if (!dev && !isInFrame()) {
+    return {
+      standalone: true,
+    };
+  }
+
   if (!apiHost) {
     throw Error(MISSING_API_HOST_MESSAGE);
   }
