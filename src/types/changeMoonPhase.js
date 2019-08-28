@@ -1,0 +1,1 @@
+export const CHANGE_MOON_PHASE = 'CHANGE_MOON_PHASE';

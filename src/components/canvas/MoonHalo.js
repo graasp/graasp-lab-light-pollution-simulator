@@ -1,11 +1,13 @@
 import React from 'react';
 import { Circle } from 'react-konva';
 import {
-  NUM_ITERATIONS_TO_SKIP, // might need to define more of these variables according to phase
   CRESCENT_MOON,
-  NUM_CIRCLES_IN_HALO,
   DEFAULT_COLOR_MOON_RGBA,
   FULL_MOON,
+  NEW_MOON,
+  NUM_CIRCLES_IN_HALO,
+  NUM_ITERATIONS_TO_SKIP, // might need to define more of these variables according to phase
+  QUARTER_MOON,
 } from '../../config/settings';
 
 const calculateRadius = (scale = 1) => {
@@ -34,6 +36,7 @@ const MoonHalo = ({ x, y, phase }) => {
       let shadowOpacity = 0.1;
       switch (phase) {
         case CRESCENT_MOON:
+        default:
           // emulating the law of inverse square,
           // but actually exponentiating to one
           color = `rgba(211, 211, 211, ${1 / (i + 1) ** 1.2})`;
@@ -55,7 +58,38 @@ const MoonHalo = ({ x, y, phase }) => {
             />
           );
         case FULL_MOON:
-        default:
+          return (
+            <Circle
+              x={x - HIDDEN_OBJECT_OFFSET}
+              y={y - calculateRadius() - HIDDEN_OBJECT_OFFSET}
+              radius={calculateRadius() + i * RADIUS_WIDTH_FACTOR}
+              fill={DEFAULT_COLOR_MOON_RGBA}
+              shadowColor={color}
+              shadowBlur={shadowBlur}
+              shadowOpacity={shadowOpacity}
+              shadowOffset={{
+                x: HIDDEN_OBJECT_OFFSET,
+                y: HIDDEN_OBJECT_OFFSET,
+              }}
+            />
+          );
+        case NEW_MOON:
+          return (
+            <Circle
+              x={x - HIDDEN_OBJECT_OFFSET}
+              y={y - calculateRadius() - HIDDEN_OBJECT_OFFSET}
+              radius={calculateRadius() + i * RADIUS_WIDTH_FACTOR}
+              fill={DEFAULT_COLOR_MOON_RGBA}
+              shadowColor={color}
+              shadowBlur={shadowBlur}
+              shadowOpacity={shadowOpacity}
+              shadowOffset={{
+                x: HIDDEN_OBJECT_OFFSET,
+                y: HIDDEN_OBJECT_OFFSET,
+              }}
+            />
+          );
+        case QUARTER_MOON:
           return (
             <Circle
               x={x - HIDDEN_OBJECT_OFFSET}
