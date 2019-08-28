@@ -20,6 +20,8 @@ export const NO_SHIELDING = 'none';
 export const DEFAULT_COLOR_MOON_RGBA = 'rgba(0, 0, 0, 1)';
 export const CRESCENT_MOON = 'CRESCENT_MOON';
 export const FULL_MOON = 'FULL_MOON';
+export const NEW_MOON = 'NEW_MOON';
+export const QUARTER_MOON = 'QUARTER_MOON';
 export const NUM_ITERATIONS_TO_SKIP = 10;
 
 // reference dimensions

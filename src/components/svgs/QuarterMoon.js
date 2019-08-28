@@ -2,12 +2,13 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Path } from 'react-konva';
 
-const Moon = ({ x, y, scaleX, scaleY, fill }) => (
+const QuarterMoon = ({ x, y, scaleX, scaleY, fill, onClick }) => (
   <Fragment>
     <Path
       x={x}
       y={y}
-      data="M59.693 76.996a42.514 42.514 0 0 0 15.435-2.882 42.431 42.431 0 0 1-25.236 8.271c-23.547.001-42.635-19.087-42.635-42.633C7.257 21.649 18.541 6.186 34.456 0 23.906 7.761 17.06 20.262 17.06 34.363c-.001 23.546 19.086 42.633 42.633 42.633z"
+      onClick={onClick}
+      data="M25.768 0a44.1 49 60 0 0 44.1 76.383"
       fill={fill}
       scaleX={scaleX}
       scaleY={scaleY}
@@ -15,16 +16,18 @@ const Moon = ({ x, y, scaleX, scaleY, fill }) => (
   </Fragment>
 );
 
-Moon.propTypes = {
+QuarterMoon.propTypes = {
   x: PropTypes.number.isRequired,
   y: PropTypes.number.isRequired,
   scaleX: PropTypes.number.isRequired,
   scaleY: PropTypes.number.isRequired,
   fill: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
-Moon.defaultProps = {
+QuarterMoon.defaultProps = {
   fill: 'lightgray',
+  onClick: () => {},
 };
 
-export default Moon;
+export default QuarterMoon;

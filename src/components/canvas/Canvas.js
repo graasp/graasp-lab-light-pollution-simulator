@@ -197,7 +197,7 @@ class Canvas extends Component {
       y: 0.506 * height,
     };
     // we need to know moon width to calculate the position of its halo
-    const newMoon = {
+    const theMoon = {
       ...moon,
       scaleX: 3.0 * scale,
       scaleY: 3.0 * scale,
@@ -224,7 +224,7 @@ class Canvas extends Component {
       grassTypeD: newGrassTypeD,
       hill: newHill,
       house: newHouse,
-      moon: newMoon,
+      moon: theMoon,
       tree: newTree,
     });
   }
