@@ -31,26 +31,24 @@ const MoonHalo = ({ x, y, phase }) => {
       // these variables depend on phase of the Moon
       // default values
       // emulating the law of inverse square,
-      let color = `rgba(211, 211, 211, ${1 / (i + 1) ** 0.5})`;
-      let shadowBlur = 5;
-      let shadowOpacity = 0.1;
+      const haloColorCrescent = `rgba(211, 211, 211, ${1 / (i + 1) ** 1.2})`;
+      const haloColorFull = `rgba(211, 211, 211, ${1 / (i + 1) ** 0.5})`;
+      const haloColorNew = `rgba(211, 211, 211, ${1 / (i + 1) ** 10})`;
+      const haloColorQuarter = `rgba(211, 211, 211, ${1 / (i + 1) ** 0.9})`;
+      const haloBlur = 5;
+      const haloOpacity = 0.1;
       switch (phase) {
         case CRESCENT_MOON:
         default:
-          // emulating the law of inverse square,
-          // but actually exponentiating to one
-          color = `rgba(211, 211, 211, ${1 / (i + 1) ** 1.2})`;
-          shadowBlur = 5;
-          shadowOpacity = 0.1;
           return (
             <Circle
               x={x - HIDDEN_OBJECT_OFFSET}
               y={y - calculateRadius() - HIDDEN_OBJECT_OFFSET}
               radius={calculateRadius() + i * RADIUS_WIDTH_FACTOR}
               fill={DEFAULT_COLOR_MOON_RGBA}
-              shadowColor={color}
-              shadowBlur={shadowBlur}
-              shadowOpacity={shadowOpacity}
+              shadowColor={haloColorCrescent}
+              shadowBlur={haloBlur}
+              shadowOpacity={haloOpacity}
               shadowOffset={{
                 x: HIDDEN_OBJECT_OFFSET,
                 y: HIDDEN_OBJECT_OFFSET,
@@ -64,9 +62,9 @@ const MoonHalo = ({ x, y, phase }) => {
               y={y - calculateRadius() - HIDDEN_OBJECT_OFFSET}
               radius={calculateRadius() + i * RADIUS_WIDTH_FACTOR}
               fill={DEFAULT_COLOR_MOON_RGBA}
-              shadowColor={color}
-              shadowBlur={shadowBlur}
-              shadowOpacity={shadowOpacity}
+              shadowColor={haloColorFull}
+              shadowBlur={haloBlur}
+              shadowOpacity={haloOpacity}
               shadowOffset={{
                 x: HIDDEN_OBJECT_OFFSET,
                 y: HIDDEN_OBJECT_OFFSET,
@@ -80,9 +78,9 @@ const MoonHalo = ({ x, y, phase }) => {
               y={y - calculateRadius() - HIDDEN_OBJECT_OFFSET}
               radius={calculateRadius() + i * RADIUS_WIDTH_FACTOR}
               fill={DEFAULT_COLOR_MOON_RGBA}
-              shadowColor={color}
-              shadowBlur={shadowBlur}
-              shadowOpacity={shadowOpacity}
+              shadowColor={haloColorNew}
+              shadowBlur={haloBlur}
+              shadowOpacity={haloOpacity}
               shadowOffset={{
                 x: HIDDEN_OBJECT_OFFSET,
                 y: HIDDEN_OBJECT_OFFSET,
@@ -96,9 +94,9 @@ const MoonHalo = ({ x, y, phase }) => {
               y={y - calculateRadius() - HIDDEN_OBJECT_OFFSET}
               radius={calculateRadius() + i * RADIUS_WIDTH_FACTOR}
               fill={DEFAULT_COLOR_MOON_RGBA}
-              shadowColor={color}
-              shadowBlur={shadowBlur}
-              shadowOpacity={shadowOpacity}
+              shadowColor={haloColorQuarter}
+              shadowBlur={haloBlur}
+              shadowOpacity={haloOpacity}
               shadowOffset={{
                 x: HIDDEN_OBJECT_OFFSET,
                 y: HIDDEN_OBJECT_OFFSET,
