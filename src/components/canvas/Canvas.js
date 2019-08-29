@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles/index';
 import BushTypeA from '../svgs/BushTypeA';
 import BushTypeB from '../svgs/BushTypeB';
+import Dog from '../svgs/Dog';
 import GrassTypeA from '../svgs/GrassTypeA';
 import GrassTypeB from '../svgs/GrassTypeB';
 import GrassTypeC from '../svgs/GrassTypeC';
@@ -14,6 +15,7 @@ import Hill from '../svgs/Hill';
 import House from '../svgs/House';
 import LampPosts from './LampPosts';
 import Moon from './Moon';
+import Telescope from '../svgs/Telescope';
 import Tree from '../svgs/Tree';
 import { addLampPost } from '../../actions';
 import {
@@ -47,6 +49,12 @@ class Canvas extends Component {
       // scaleY: 0.1,
     },
     bushTypeB: {
+      x: 0,
+      y: 0,
+      // scaleX: 0.1,
+      // scaleY: 0.1,
+    },
+    dog: {
       x: 0,
       y: 0,
       // scaleX: 0.1,
@@ -100,6 +108,12 @@ class Canvas extends Component {
       // scaleX: 0.1,
       // scaleY: 0.1,
     },
+    telescope: {
+      x: 0,
+      y: 0,
+      // scaleX: 0.1,
+      // scaleY: 0.1,
+    },
     tree: {
       x: 0, // 100
       y: 0, // 120
@@ -121,6 +135,7 @@ class Canvas extends Component {
     const {
       bushTypeA,
       bushTypeB,
+      dog,
       grassTypeAItem1,
       grassTypeAItem2,
       grassTypeB,
@@ -129,6 +144,7 @@ class Canvas extends Component {
       hill,
       house,
       moon,
+      telescope,
       tree,
       width,
       height,
@@ -146,6 +162,13 @@ class Canvas extends Component {
       scaleY: 0.2 * scale,
       x: 0.72 * width,
       y: 0.771 * height,
+    };
+    const theDog = {
+      ...dog, // next to the telescope
+      scaleX: 0.139 * scale,
+      scaleY: 0.139 * scale,
+      x: 0.81 * width,
+      y: 0.696 * height,
     };
     const newGrassTypeAItem1 = {
       ...grassTypeAItem1, // on the left of the hill, highest of the two
@@ -206,6 +229,13 @@ class Canvas extends Component {
       width: scale * 3.0 * 100,
       height: scale * 3.0 * 400,
     };
+    const theTelescope = {
+      ...telescope,
+      scaleX: 0.25 * scale,
+      scaleY: 0.25 * scale,
+      x: 0.778 * width,
+      y: 0.655 * height,
+    };
     const newTree = {
       ...tree,
       scaleX: 1.1 * scale,
@@ -217,6 +247,7 @@ class Canvas extends Component {
     this.setState({
       bushTypeA: newBushTypeA,
       bushTypeB: newBushTypeB,
+      dog: theDog,
       grassTypeAItem1: newGrassTypeAItem1,
       grassTypeAItem2: newGrassTypeAItem2,
       grassTypeB: newGrassTypeB,
@@ -225,6 +256,7 @@ class Canvas extends Component {
       hill: newHill,
       house: newHouse,
       moon: theMoon,
+      telescope: theTelescope,
       tree: newTree,
     });
   }
@@ -295,6 +327,7 @@ class Canvas extends Component {
     const {
       bushTypeA,
       bushTypeB,
+      dog,
       grassTypeAItem1,
       grassTypeAItem2,
       grassTypeB,
@@ -303,6 +336,7 @@ class Canvas extends Component {
       hill,
       house,
       moon,
+      telescope,
       tree,
     } = this.state;
 
@@ -330,6 +364,12 @@ class Canvas extends Component {
                     y={bushTypeB.y}
                     scaleX={bushTypeB.scaleX}
                     scaleY={bushTypeB.scaleY}
+                  />
+                  <Dog
+                    x={dog.x}
+                    y={dog.y}
+                    scaleX={dog.scaleX}
+                    scaleY={dog.scaleY}
                   />
                   <GrassTypeA
                     x={grassTypeAItem1.x}
@@ -376,6 +416,12 @@ class Canvas extends Component {
                   <LampPosts />
                   <Moon phase={CRESCENT_MOON} moon={moon} />
                   <Stars />
+                  <Telescope
+                    x={telescope.x}
+                    y={telescope.y}
+                    scaleX={telescope.scaleX}
+                    scaleY={telescope.scaleY}
+                  />
                   <Tree
                     x={tree.x}
                     y={tree.y}
