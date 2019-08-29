@@ -12,10 +12,10 @@ import GrassTypeB from '../svgs/GrassTypeB';
 import GrassTypeC from '../svgs/GrassTypeC';
 import GrassTypeD from '../svgs/GrassTypeD';
 import Hill from '../svgs/Hill';
-import House from '../svgs/House';
 import LampPosts from './LampPosts';
 import Moon from './Moon';
 import Telescope from '../svgs/Telescope';
+import House from './House';
 import Tree from '../svgs/Tree';
 import { addLampPost } from '../../actions';
 import {
@@ -277,8 +277,18 @@ class Canvas extends Component {
     return clientY > height / 2;
   };
 
+  isInLeftThird = clientX => {
+    const { width } = this.state;
+    return clientX < width / 3;
+  };
+
   handleClick = ({ evt, target }) => {
     const { clientX, clientY } = evt;
+
+    // commands after this check only apply to the right two thirds of the canvas
+    if (this.isInLeftThird(clientX)) {
+      return false;
+    }
 
     // commands after this check only apply to the bottom half of the canvas
     if (!this.isInBottomHalf(clientY)) {
@@ -407,12 +417,7 @@ class Canvas extends Component {
                     scaleX={hill.scaleX}
                     scaleY={hill.scaleY}
                   />
-                  <House
-                    x={house.x}
-                    y={house.y}
-                    scaleX={house.scaleX}
-                    scaleY={house.scaleY}
-                  />
+                  <House house={house} />
                   <LampPosts />
                   <Moon phase={CRESCENT_MOON} moon={moon} />
                   <Stars />

@@ -5,3 +5,4 @@ export * from './moon';
 export * from './lampPost';
 export * from './settings';
 export * from './users';
+export * from './house';

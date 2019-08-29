@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Path } from 'react-konva';
 
-const House = ({ x, y, scaleX, scaleY, fill }) => (
+const HouseWithoutLight = ({ x, y, scaleX, scaleY, fill, onClick }) => (
   <Fragment>
     <Path
       x={x}
@@ -11,20 +11,23 @@ const House = ({ x, y, scaleX, scaleY, fill }) => (
       fill={fill}
       scaleX={scaleX}
       scaleY={scaleY}
+      onClick={onClick}
     />
   </Fragment>
 );
 
-House.propTypes = {
+HouseWithoutLight.propTypes = {
   x: PropTypes.number.isRequired,
   y: PropTypes.number.isRequired,
   scaleX: PropTypes.number.isRequired,
   scaleY: PropTypes.number.isRequired,
   fill: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
-House.defaultProps = {
+HouseWithoutLight.defaultProps = {
   fill: 'black',
+  onClick: () => {},
 };
 
-export default House;
+export default HouseWithoutLight;
