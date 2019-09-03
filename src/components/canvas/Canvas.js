@@ -4,18 +4,16 @@ import { connect, ReactReduxContext, Provider } from 'react-redux';
 import { Stage, Layer } from 'react-konva';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles/index';
-import BushTypeA from '../svgs/BushTypeA';
 import BushTypeB from '../svgs/BushTypeB';
 import Dog from '../svgs/Dog';
 import GrassTypeA from '../svgs/GrassTypeA';
-import GrassTypeB from '../svgs/GrassTypeB';
 import GrassTypeC from '../svgs/GrassTypeC';
 import GrassTypeD from '../svgs/GrassTypeD';
 import Hill from '../svgs/Hill';
+import House from './House';
 import LampPosts from './LampPosts';
 import Moon from './Moon';
 import Telescope from '../svgs/Telescope';
-import House from './House';
 import Tree from '../svgs/Tree';
 import { addLampPost } from '../../actions';
 import {
@@ -42,12 +40,6 @@ class Canvas extends Component {
   state = {
     width: window.innerWidth,
     height: window.innerHeight,
-    bushTypeA: {
-      x: 0,
-      y: 0,
-      // scaleX: 0.1,
-      // scaleY: 0.1,
-    },
     bushTypeB: {
       x: 0,
       y: 0,
@@ -67,12 +59,6 @@ class Canvas extends Component {
       // scaleY: 0.1,
     },
     grassTypeAItem2: {
-      x: 0,
-      y: 0,
-      // scaleX: 0.1,
-      // scaleY: 0.1,
-    },
-    grassTypeB: {
       x: 0,
       y: 0,
       // scaleX: 0.1,
@@ -133,12 +119,10 @@ class Canvas extends Component {
   componentDidMount() {
     const scale = this.calculateScale();
     const {
-      bushTypeA,
       bushTypeB,
       dog,
       grassTypeAItem1,
       grassTypeAItem2,
-      grassTypeB,
       grassTypeC,
       grassTypeD,
       hill,
@@ -149,13 +133,6 @@ class Canvas extends Component {
       width,
       height,
     } = this.state;
-    const newBushTypeA = {
-      ...bushTypeA, // on the left of the house
-      scaleX: 0.8 * scale,
-      scaleY: 0.5 * scale,
-      x: 1e-5 * width,
-      y: 0.75 * height,
-    };
     const newBushTypeB = {
       ...bushTypeB, // on the left base of the hill
       scaleX: 0.2 * scale,
@@ -184,13 +161,6 @@ class Canvas extends Component {
       x: 0.885 * width,
       y: 0.668 * height,
     };
-    const newGrassTypeB = {
-      ...grassTypeB, // on the porch of the house
-      scaleX: 0.15 * scale,
-      scaleY: 0.15 * scale,
-      x: 0.25 * width,
-      y: 0.762 * height,
-    };
     const newGrassTypeC = {
       ...grassTypeC, // rightmost grass, on the hill
       scaleX: 0.15 * scale,
@@ -217,7 +187,7 @@ class Canvas extends Component {
       scaleX: 2.0 * scale,
       scaleY: 1.6 * scale,
       x: 0.001 * width,
-      y: 0.506 * height,
+      y: 0.509 * height,
     };
     // we need to know moon width to calculate the position of its halo
     const theMoon = {
@@ -245,12 +215,10 @@ class Canvas extends Component {
     };
 
     this.setState({
-      bushTypeA: newBushTypeA,
       bushTypeB: newBushTypeB,
       dog: theDog,
       grassTypeAItem1: newGrassTypeAItem1,
       grassTypeAItem2: newGrassTypeAItem2,
-      grassTypeB: newGrassTypeB,
       grassTypeC: newGrassTypeC,
       grassTypeD: newGrassTypeD,
       hill: newHill,
@@ -335,12 +303,10 @@ class Canvas extends Component {
 
   render() {
     const {
-      bushTypeA,
       bushTypeB,
       dog,
       grassTypeAItem1,
       grassTypeAItem2,
-      grassTypeB,
       grassTypeC,
       grassTypeD,
       hill,
@@ -363,12 +329,6 @@ class Canvas extends Component {
             >
               <Provider store={store}>
                 <Layer>
-                  <BushTypeA
-                    x={bushTypeA.x}
-                    y={bushTypeA.y}
-                    scaleX={bushTypeA.scaleX}
-                    scaleY={bushTypeA.scaleY}
-                  />
                   <BushTypeB
                     x={bushTypeB.x}
                     y={bushTypeB.y}
@@ -392,12 +352,6 @@ class Canvas extends Component {
                     y={grassTypeAItem2.y}
                     scaleX={grassTypeAItem2.scaleX}
                     scaleY={grassTypeAItem2.scaleY}
-                  />
-                  <GrassTypeB
-                    x={grassTypeB.x}
-                    y={grassTypeB.y}
-                    scaleX={grassTypeB.scaleX}
-                    scaleY={grassTypeB.scaleY}
                   />
                   <GrassTypeC
                     x={grassTypeC.x}
