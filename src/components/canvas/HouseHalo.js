@@ -18,9 +18,9 @@ const HouseHalo = ({ x, y }) => {
     .map((e, i) => {
       // emulating the law of inverse square,
       // but actually exponentiating to one
-      const color = `rgba(248, 148, 6, ${1 / (i + 1) ** 1})`;
+      const color = `rgba(248, 148, 6, ${1 / (i + 1) ** 1.4})`;
       const shadowBlur = 5;
-      const shadowOpacity = 0.1;
+      const shadowOpacity = 0.3;
 
       return (
         <Circle
