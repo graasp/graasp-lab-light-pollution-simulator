@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { turnLightOffInHouse, turnLightOnInHouse } from '../../actions/house';
-import HouseWithoutLight from '../svgs/HouseWithoutLight';
-import HouseWithLight from '../svgs/HouseWithLight';
 import HouseHalo from './HouseHalo';
+import HouseWithLight from '../svgs/HouseWithLight';
+import HouseWithoutLight from '../svgs/HouseWithoutLight';
 
 class House extends Component {
   static propTypes = {
