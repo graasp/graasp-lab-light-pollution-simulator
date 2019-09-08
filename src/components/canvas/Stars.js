@@ -51,6 +51,18 @@ const generateStars = lampPosts => {
       r: 2.3,
     },
     {
+      x: 0.11 * width,
+      y: 0.55 * height,
+      opacity: 1 - calculateOpacity(numLampPosts),
+      r: 0.05,
+    },
+    {
+      x: 0.13 * width,
+      y: 0.54 * height,
+      opacity: 1 - calculateOpacity(numLampPosts),
+      r: 0.07,
+    },
+    {
       x: 0.13 * width,
       y: 0.29 * height,
       opacity: 1 - calculateOpacity(numLampPosts),
