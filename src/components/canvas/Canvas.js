@@ -19,6 +19,8 @@ import { addLampPost } from '../../actions';
 import {
   BUFFER_WIDTH,
   CRESCENT_MOON,
+  FIXED_HEIGHT,
+  FIXED_WIDTH,
   FOOTER_HEIGHT,
   MAX_LAMP_POSTS,
   SKY_COLOR,
@@ -38,8 +40,8 @@ class Canvas extends Component {
   };
 
   state = {
-    width: window.innerWidth,
-    height: window.innerHeight,
+    width: FIXED_WIDTH,
+    height: FIXED_HEIGHT,
     bushTypeB: {
       x: 0,
       y: 0,
@@ -323,9 +325,10 @@ class Canvas extends Component {
         <ReactReduxContext.Consumer>
           {({ store }) => (
             <Stage
-              width={window.innerWidth}
-              height={window.innerHeight - FOOTER_HEIGHT}
+              width={FIXED_WIDTH}
+              height={FIXED_HEIGHT - FOOTER_HEIGHT}
               onClick={this.handleClick}
+              onTap={this.handleClick}
             >
               <Provider store={store}>
                 <Layer>
