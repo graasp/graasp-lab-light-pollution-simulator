@@ -8,6 +8,7 @@ const QuarterMoon = ({ x, y, scaleX, scaleY, fill, onClick }) => (
       x={x}
       y={y}
       onClick={onClick}
+      onTap={onClick}
       data="M25.768 0a44.1 49 60 0 0 44.1 76.383"
       fill={fill}
       scaleX={scaleX}

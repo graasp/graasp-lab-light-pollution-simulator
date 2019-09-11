@@ -25,8 +25,10 @@ export const QUARTER_MOON = 'QUARTER_MOON';
 export const NUM_ITERATIONS_TO_SKIP = 10;
 
 // reference dimensions
-export const FOOTER_HEIGHT = Math.round(0.2 * window.innerHeight);
-export const HOUSE_HEIGHT = Math.round(0.35 * window.innerHeight);
+export const FIXED_WIDTH = 1882; // todo: replace with dynamic innerWidth
+export const FIXED_HEIGHT = 950; // todo: replace with dynamic innerHeight
+export const FOOTER_HEIGHT = Math.round(0.2 * FIXED_HEIGHT);
+export const HOUSE_HEIGHT = Math.round(0.35 * FIXED_HEIGHT);
 
 // sizes
 export const SIZE_LARGE = 'large';
@@ -36,7 +38,7 @@ export const SIZE_SMALL = 'small';
 export const SKY_COLOR = '#333232';
 
 // stars
-export const STAR_OPACITY_REDUCTION_FACTOR = 0.1;
+export const STAR_OPACITY_REDUCTION_FACTOR = 0.075;
 
 // miscellany
 export const DEFAULT_API_HOST =

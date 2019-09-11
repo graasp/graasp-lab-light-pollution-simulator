@@ -126,6 +126,7 @@ class LampPost extends Component {
             angle={180}
             rotation={180}
             onClick={this.handleLampClick}
+            onTap={this.handleLampClick}
             fill="black"
             id={x}
           />
@@ -156,6 +157,7 @@ class LampPost extends Component {
             'rgba(248, 148, 6, 0)',
           ]}
           onClick={this.handleLampClick}
+          onTap={this.handleLampClick}
           id={x}
         />
         <Line
@@ -165,6 +167,7 @@ class LampPost extends Component {
           stroke={stroke}
           strokeWidth={5}
           onClick={this.handlePostClick}
+          onTap={this.handlePostClick}
         />
         {this.renderShielding({ x, y, size })}
       </Fragment>

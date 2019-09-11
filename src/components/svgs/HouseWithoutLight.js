@@ -12,6 +12,7 @@ const HouseWithoutLight = ({ x, y, scaleX, scaleY, fill, onClick }) => (
       scaleX={scaleX}
       scaleY={scaleY}
       onClick={onClick}
+      onTap={onClick}
     />
     <Path
       x={x}
@@ -21,6 +22,7 @@ const HouseWithoutLight = ({ x, y, scaleX, scaleY, fill, onClick }) => (
       scaleX={scaleX}
       scaleY={scaleY}
       onClick={onClick}
+      onTap={onClick}
     />
   </Fragment>
 );
