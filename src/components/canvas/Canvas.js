@@ -150,15 +150,15 @@ class Canvas extends Component {
   };
 
   handleClick = ({ evt, target }) => {
-    const { clientX, clientY } = evt;
+    const { pageX, pageY } = evt;
 
     // commands after this check only apply to the right two thirds of the canvas
-    if (this.isInLeftThird(clientX)) {
+    if (this.isInLeftThird(pageX)) {
       return false;
     }
 
     // commands after this check only apply to the bottom half of the canvas
-    if (!this.isInBottomHalf(clientY)) {
+    if (!this.isInBottomHalf(pageY)) {
       return false;
     }
 
@@ -187,12 +187,12 @@ class Canvas extends Component {
     // ensure that click is not within a safe zone around existing post
     let valid = true;
     lampPosts.forEach(({ x }) => {
-      if (Math.abs(x - clientX) < BUFFER_WIDTH) {
+      if (Math.abs(x - pageX) < BUFFER_WIDTH) {
         valid = false;
       }
     });
     if (valid) {
-      dispatchAddLampPost({ x: clientX });
+      dispatchAddLampPost({ x: pageX });
       return true;
     }
 
