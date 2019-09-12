@@ -29,28 +29,31 @@ const Halo = ({ size, x, y, shielding }) => {
   // this is the location where the hidden
   // object that casts a shadow is being placed
   const HIDDEN_OBJECT_OFFSET = 100000;
+
+  // these values are constant for all rings
+  const shadowBlur = 5;
+  const shadowOpacity = 0.1;
+  const calculatedSize = calculateSize(size);
+  const calculatedRadius = calculateRadius();
   return Array(NUM_CIRCLES_IN_HALO)
     .fill()
     .map((e, i) => {
       // emulating the law of inverse square,
       // but actually exponentiating to one
       const color = `rgba(248, 148, 6, ${1 / (i + 1) ** 1})`;
-      const shadowBlur = 5;
-      const shadowOpacity = 0.1;
+      const key = `arc-${i}`;
       switch (shielding) {
         case FULL_SHIELDING:
           return (
             <Arc
               x={x - HIDDEN_OBJECT_OFFSET}
               y={
-                y -
-                calculateSize(size) -
-                calculateRadius() * 2 -
-                HIDDEN_OBJECT_OFFSET
+                y - calculatedSize - calculatedRadius * 2 - HIDDEN_OBJECT_OFFSET
               }
+              key={key}
               fill={DEFAULT_COLOR_RGBA}
               innerRadius={0}
-              outerRadius={calculateRadius() + i * RADIUS_WIDTH_FACTOR}
+              outerRadius={calculatedRadius + i * RADIUS_WIDTH_FACTOR}
               angle={100}
               rotation={40}
               shadowColor={color}
@@ -66,16 +69,12 @@ const Halo = ({ size, x, y, shielding }) => {
           return (
             <Arc
               x={x - HIDDEN_OBJECT_OFFSET}
-              y={
-                y -
-                calculateSize(size) -
-                calculateRadius() -
-                HIDDEN_OBJECT_OFFSET
-              }
+              y={y - calculatedSize - calculatedRadius - HIDDEN_OBJECT_OFFSET}
               fill={DEFAULT_COLOR_RGBA}
               innerRadius={0}
-              outerRadius={calculateRadius() + i * RADIUS_WIDTH_FACTOR}
+              outerRadius={calculatedRadius + i * RADIUS_WIDTH_FACTOR}
               angle={180}
+              key={key}
               shadowColor={color}
               shadowBlur={shadowBlur}
               shadowOpacity={shadowOpacity}
@@ -90,14 +89,10 @@ const Halo = ({ size, x, y, shielding }) => {
           return (
             <Circle
               x={x - HIDDEN_OBJECT_OFFSET}
-              y={
-                y -
-                calculateSize(size) -
-                calculateRadius() -
-                HIDDEN_OBJECT_OFFSET
-              }
-              radius={calculateRadius() + i * RADIUS_WIDTH_FACTOR}
+              y={y - calculatedSize - calculatedRadius - HIDDEN_OBJECT_OFFSET}
+              radius={calculatedRadius + i * RADIUS_WIDTH_FACTOR}
               fill={DEFAULT_COLOR_RGBA}
+              key={key}
               shadowColor={color}
               shadowBlur={shadowBlur}
               shadowOpacity={shadowOpacity}

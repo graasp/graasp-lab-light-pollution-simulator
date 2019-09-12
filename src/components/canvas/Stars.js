@@ -289,7 +289,7 @@ const generateStars = lampPosts => {
 const Stars = props => {
   const { lampPosts } = props;
   const stars = generateStars(lampPosts);
-  return stars.map(star => <Star {...star} />);
+  return stars.map(star => <Star {...star} key={`(${star.x},${star.y})`} />);
 };
 
 const mapStateToProps = ({ lampPost }) => {
