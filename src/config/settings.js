@@ -30,6 +30,9 @@ export const FIXED_HEIGHT = 950; // todo: replace with dynamic innerHeight
 export const FOOTER_HEIGHT = Math.round(0.2 * FIXED_HEIGHT);
 export const HOUSE_HEIGHT = Math.round(0.35 * FIXED_HEIGHT);
 
+// sidewalk
+export const SIDEWALK_COLOR = 'rgba(30, 30, 30, 1)';
+
 // sizes
 export const SIZE_LARGE = 'large';
 export const SIZE_SMALL = 'small';
