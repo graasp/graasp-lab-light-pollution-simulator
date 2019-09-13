@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Konva from 'konva';
-import { connect, ReactReduxContext, Provider } from 'react-redux';
+import { ReactReduxContext, Provider } from 'react-redux';
 import { Stage, Layer } from 'react-konva';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles/index';
@@ -10,21 +9,13 @@ import House from './House';
 import LampPosts from './LampPosts';
 import Moon from './Moon';
 import Sidewalk from '../svgs/Sidewalk';
-import { addLampPost } from '../../actions';
 import {
-  BUFFER_WIDTH,
   CRESCENT_MOON,
   FIXED_HEIGHT,
   FIXED_WIDTH,
   FOOTER_HEIGHT,
-  MAX_LAMP_POSTS,
   SKY_COLOR,
 } from '../../config/settings';
-import { showErrorToast } from '../../utils/toasts';
-import {
-  LAMP_POST_TOO_CLOSE_MESSAGE,
-  TOO_MANY_LAMP_POSTS_MESSAGE,
-} from '../../constants/messages';
 import Stars from './Stars';
 
 class Canvas extends Component {
@@ -71,10 +62,6 @@ class Canvas extends Component {
 
   static propTypes = {
     classes: PropTypes.shape({}).isRequired,
-    dispatchAddLampPost: PropTypes.func.isRequired,
-    lampPosts: PropTypes.arrayOf(PropTypes.shape({ x: PropTypes.number }))
-      .isRequired,
-    lampPostActivity: PropTypes.bool.isRequired,
   };
 
   componentDidMount() {
@@ -116,7 +103,7 @@ class Canvas extends Component {
       scaleX: 2.18 * scale,
       scaleY: 3.8 * scale,
       x: 0.299 * width,
-      y: 0.795 * height,
+      y: 0.798 * height,
     };
 
     this.setState({
@@ -137,67 +124,6 @@ class Canvas extends Component {
     const { height } = this.state;
     const factor = 250;
     return factor / height;
-  };
-
-  isInBottomHalf = clientY => {
-    const { height } = this.state;
-    return clientY > height / 2;
-  };
-
-  isInLeftThird = clientX => {
-    const { width } = this.state;
-    return clientX < width / 3;
-  };
-
-  handleClick = ({ evt, target }) => {
-    const { pageX, pageY } = evt;
-
-    // commands after this check only apply to the right two thirds of the canvas
-    if (this.isInLeftThird(pageX)) {
-      return false;
-    }
-
-    // commands after this check only apply to the bottom half of the canvas
-    if (!this.isInBottomHalf(pageY)) {
-      return false;
-    }
-
-    const { dispatchAddLampPost, lampPosts, lampPostActivity } = this.props;
-
-    // do not consider clicks on the lamp posts
-    if (target instanceof Konva.Line) {
-      return false;
-    }
-
-    // do not consider clicks on lamps
-    if (target instanceof Konva.Circle) {
-      return false;
-    }
-
-    // do not do anything if there is still activity going on
-    if (lampPostActivity) {
-      return false;
-    }
-
-    if (lampPosts.length >= MAX_LAMP_POSTS) {
-      showErrorToast(TOO_MANY_LAMP_POSTS_MESSAGE);
-      return false;
-    }
-
-    // ensure that click is not within a safe zone around existing post
-    let valid = true;
-    lampPosts.forEach(({ x }) => {
-      if (Math.abs(x - pageX) < BUFFER_WIDTH) {
-        valid = false;
-      }
-    });
-    if (valid) {
-      dispatchAddLampPost({ x: pageX });
-      return true;
-    }
-
-    showErrorToast(LAMP_POST_TOO_CLOSE_MESSAGE);
-    return false;
   };
 
   render() {
@@ -230,15 +156,16 @@ class Canvas extends Component {
                     scaleY={hill.scaleY}
                   />
                   <House house={house} />
-                  <LampPosts />
-                  <Moon phase={CRESCENT_MOON} moon={moon} />
                   <Sidewalk
                     x={sidewalk.x}
                     y={sidewalk.y}
                     scaleX={sidewalk.scaleX}
                     scaleY={sidewalk.scaleY}
                   />
+                  {/* lamp posts have to go after sidewalk to render on top */}
+                  <LampPosts />
                   <Stars />
+                  <Moon phase={CRESCENT_MOON} moon={moon} />
                 </Layer>
               </Provider>
             </Stage>
@@ -249,21 +176,4 @@ class Canvas extends Component {
   }
 }
 
-const mapStateToProps = ({ lampPost }) => {
-  const { content, activity } = lampPost;
-  return {
-    lampPosts: content,
-    lampPostActivity: activity,
-  };
-};
-
-const mapDispatchToProps = {
-  dispatchAddLampPost: addLampPost,
-};
-
-const ConnectedComponent = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Canvas);
-
-export default withStyles(Canvas.styles)(ConnectedComponent);
+export default withStyles(Canvas.styles)(Canvas);

@@ -92,7 +92,7 @@ class LampPost extends Component {
   };
 
   renderShielding({ x, y, size }) {
-    const { shielding } = this.props;
+    const { shielding, dispatchChangeLampPostShielding } = this.props;
 
     switch (shielding) {
       case FULL_SHIELDING:
@@ -113,6 +113,12 @@ class LampPost extends Component {
             fill="black"
             stroke="black"
             strokeWidth={5}
+            onClick={() =>
+              dispatchChangeLampPostShielding({ x, shielding: 'none' })
+            }
+            onTap={() =>
+              dispatchChangeLampPostShielding({ x, shielding: 'none' })
+            }
             closed
           />
         );
@@ -162,10 +168,17 @@ class LampPost extends Component {
         />
         <Line
           id={x}
-          size={this.calculateSize(size)}
           points={[x, y - this.calculateSize(size), x, y]}
           stroke={stroke}
           strokeWidth={5}
+          onClick={this.handlePostClick}
+          onTap={this.handlePostClick}
+        />
+        <Line
+          id={x}
+          points={[x, y - this.calculateSize(size), x, y]}
+          stroke="transparent"
+          strokeWidth={50}
           onClick={this.handlePostClick}
           onTap={this.handlePostClick}
         />
