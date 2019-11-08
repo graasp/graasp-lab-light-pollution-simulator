@@ -5,6 +5,7 @@ import {
   FIXED_HEIGHT,
   FIXED_WIDTH,
   HALF_SHIELDING,
+  TOP_SHIELDING,
   NO_SHIELDING,
   STAR_OPACITY_REDUCTION_FACTOR,
 } from '../../config/settings';
@@ -15,6 +16,9 @@ const calculateOpacity = lampPosts => {
   const numUnshieldedLampPosts = lampPosts.filter(
     lampPost => lampPost.shielding === NO_SHIELDING
   ).length;
+  const numTopShieldedLampPosts = lampPosts.filter(
+    lampPost => lampPost.shielding === TOP_SHIELDING
+  ).length;
   const numHalfShieldedLampPosts = lampPosts.filter(
     lampPost => lampPost.shielding === HALF_SHIELDING
   ).length;
@@ -23,9 +27,10 @@ const calculateOpacity = lampPosts => {
   // light reflecting from the pavement or other objects
   let dimming = numLampPosts * STAR_OPACITY_REDUCTION_FACTOR;
 
-  // added dimming from unshielded and half-shielded lamp posts
+  // added dimming from unshielded, top-shielded and half-shielded lamp posts
   dimming += numUnshieldedLampPosts * STAR_OPACITY_REDUCTION_FACTOR;
-  dimming += numHalfShieldedLampPosts * (STAR_OPACITY_REDUCTION_FACTOR / 2);
+  dimming += numTopShieldedLampPosts * (STAR_OPACITY_REDUCTION_FACTOR / 2);
+  dimming += numHalfShieldedLampPosts * (STAR_OPACITY_REDUCTION_FACTOR / 2.6);
 
   return dimming;
 };
