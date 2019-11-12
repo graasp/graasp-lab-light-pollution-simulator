@@ -51,16 +51,15 @@ const Halo = ({ size, x, y, shielding }) => {
               y={
                 y -
                 calculatedSize -
-                calculatedRadius * 2 -
-                HIDDEN_OBJECT_OFFSET +
-                5
+                calculatedRadius * 1.3 -
+                HIDDEN_OBJECT_OFFSET
               }
               key={key}
               fill={DEFAULT_COLOR_RGBA}
               innerRadius={0}
               outerRadius={calculatedRadius + i * RADIUS_WIDTH_FACTOR}
               angle={80}
-              rotation={50}
+              rotation={49}
               shadowColor={color}
               shadowBlur={shadowBlur}
               shadowOpacity={shadowOpacity}
@@ -74,7 +73,9 @@ const Halo = ({ size, x, y, shielding }) => {
           return (
             <Arc
               x={x - HIDDEN_OBJECT_OFFSET}
-              y={y - calculatedSize - calculatedRadius - HIDDEN_OBJECT_OFFSET}
+              y={
+                y - calculatedSize - calculatedRadius - HIDDEN_OBJECT_OFFSET + 3
+              }
               fill={DEFAULT_COLOR_RGBA}
               innerRadius={0}
               outerRadius={calculatedRadius + i * RADIUS_WIDTH_FACTOR}
@@ -93,17 +94,12 @@ const Halo = ({ size, x, y, shielding }) => {
           return (
             <Arc
               x={x - HIDDEN_OBJECT_OFFSET}
-              y={
-                y -
-                calculatedSize -
-                calculatedRadius -
-                HIDDEN_OBJECT_OFFSET +
-                10
-              }
+              y={y - calculatedSize - calculatedRadius - HIDDEN_OBJECT_OFFSET}
               fill={DEFAULT_COLOR_RGBA}
               innerRadius={0}
               outerRadius={calculatedRadius + i * RADIUS_WIDTH_FACTOR}
               angle={240}
+              rotation={-30}
               key={key}
               shadowColor={color}
               shadowBlur={shadowBlur}
