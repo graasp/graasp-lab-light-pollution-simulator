@@ -3,11 +3,14 @@ import { ReactReduxContext, Provider } from 'react-redux';
 import { Stage, Layer } from 'react-konva';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles/index';
+import City from '../svgs/City';
 import Dog from '../svgs/Dog';
 import Hill from '../svgs/Hill';
 import House from './House';
 import LampPosts from './LampPosts';
 import Moon from './Moon';
+import MountainLeft from '../svgs/MountainLeft';
+import MountainRight from '../svgs/MountainRight';
 import Sidewalk from '../svgs/Sidewalk';
 import {
   CRESCENT_MOON,
@@ -28,6 +31,12 @@ class Canvas extends Component {
   state = {
     width: FIXED_WIDTH,
     height: FIXED_HEIGHT,
+    city: {
+      x: 0,
+      y: 0,
+      // scaleX: 0.1,
+      // scaleY: 0.1,
+    },
     dog: {
       x: 0,
       y: 0,
@@ -52,6 +61,18 @@ class Canvas extends Component {
       // scaleX: 0.1,
       // scaleY: 0.1,
     },
+    mountainLeft: {
+      x: 0,
+      y: 0,
+      // scaleX: 0.1,
+      // scaleY: 0.1,
+    },
+    mountainRight: {
+      x: 0,
+      y: 0,
+      // scaleX: 0.1,
+      // scaleY: 0.1,
+    },
     sidewalk: {
       x: 0,
       y: 0,
@@ -66,20 +87,52 @@ class Canvas extends Component {
 
   componentDidMount() {
     const scale = this.calculateScale();
-    const { dog, hill, house, moon, sidewalk, width, height } = this.state;
+    const {
+      city,
+      dog,
+      hill,
+      house,
+      moon,
+      mountainLeft,
+      mountainRight,
+      sidewalk,
+      width,
+      height,
+    } = this.state;
+    const backgroundCity = {
+      ...city,
+      scaleX: 0.15 * scale,
+      scaleY: 0.13 * scale,
+      x: 0.465 * width,
+      y: 0.694 * height,
+    };
+    const backgroundMountainLeft = {
+      ...mountainLeft,
+      scaleX: 6.0 * scale,
+      scaleY: 4.0 * scale,
+      x: 0.22 * width,
+      y: 0.7 * height,
+    };
+    const backgroundMountainRight = {
+      ...mountainRight,
+      scaleX: 3.0 * scale,
+      scaleY: 3.0 * scale,
+      x: 0.93 * width,
+      y: 0.72 * height,
+    };
     const theDog = {
       ...dog, // next to the telescope
-      scaleX: 1.15 * scale,
-      scaleY: 1.15 * scale,
-      x: 0.77 * width,
-      y: 0.697 * height,
+      scaleX: 0.23 * scale,
+      scaleY: 0.23 * scale,
+      x: 0.745 * width,
+      y: 0.666 * height,
     };
     const newHill = {
       ...hill,
-      scaleX: 2.1 * scale,
-      scaleY: 1.5 * scale,
+      scaleX: 0.117 * scale,
+      scaleY: 0.117 * scale,
       x: 0.647 * width,
-      y: 0.386 * height,
+      y: 0.325 * height,
     };
     const newHouse = {
       ...house,
@@ -107,10 +160,13 @@ class Canvas extends Component {
     };
 
     this.setState({
+      city: backgroundCity,
       dog: theDog,
       hill: newHill,
       house: newHouse,
       moon: theMoon,
+      mountainLeft: backgroundMountainLeft,
+      mountainRight: backgroundMountainRight,
       sidewalk: mainSidewalk,
     });
   }
@@ -127,7 +183,16 @@ class Canvas extends Component {
   };
 
   render() {
-    const { dog, hill, house, moon, sidewalk } = this.state;
+    const {
+      city,
+      dog,
+      hill,
+      house,
+      moon,
+      mountainLeft,
+      mountainRight,
+      sidewalk,
+    } = this.state;
 
     const { classes } = this.props;
 
@@ -143,6 +208,24 @@ class Canvas extends Component {
             >
               <Provider store={store}>
                 <Layer>
+                  <City
+                    x={city.x}
+                    y={city.y}
+                    scaleX={city.scaleX}
+                    scaleY={city.scaleY}
+                  />
+                  <MountainLeft
+                    x={mountainLeft.x}
+                    y={mountainLeft.y}
+                    scaleX={mountainLeft.scaleX}
+                    scaleY={mountainLeft.scaleY}
+                  />
+                  <MountainRight
+                    x={mountainRight.x}
+                    y={mountainRight.y}
+                    scaleX={mountainRight.scaleX}
+                    scaleY={mountainRight.scaleY}
+                  />
                   <Dog
                     x={dog.x}
                     y={dog.y}

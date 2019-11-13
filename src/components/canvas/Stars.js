@@ -248,7 +248,7 @@ const generateStars = lampPosts => {
     },
     {
       x: 0.89 * width,
-      y: 0.37 * height,
+      y: 0.3 * height,
       opacity: 1 - dimming,
       r: 1.7,
     },
