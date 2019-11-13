@@ -4,6 +4,7 @@ import {
   DEFAULT_COLOR_RGBA,
   FULL_SHIELDING,
   HALF_SHIELDING,
+  TOP_SHIELDING,
   NO_SHIELDING,
   NUM_CIRCLES_IN_HALO,
   SIZE_LARGE,
@@ -39,8 +40,8 @@ const Halo = ({ size, x, y, shielding }) => {
     .fill()
     .map((e, i) => {
       // emulating the law of inverse square,
-      // but actually exponentiating to one
-      const color = `rgba(248, 148, 6, ${1 / (i + 1) ** 1})`;
+      // but actually exponentiating to 0.8 to reinforce the color of light
+      const color = `rgba(254, 146, 0, ${1 / (i + 1) ** 0.8})`;
       const key = `arc-${i}`;
       switch (shielding) {
         case FULL_SHIELDING:
@@ -48,14 +49,17 @@ const Halo = ({ size, x, y, shielding }) => {
             <Arc
               x={x - HIDDEN_OBJECT_OFFSET}
               y={
-                y - calculatedSize - calculatedRadius * 2 - HIDDEN_OBJECT_OFFSET
+                y -
+                calculatedSize -
+                calculatedRadius * 1.3 -
+                HIDDEN_OBJECT_OFFSET
               }
               key={key}
               fill={DEFAULT_COLOR_RGBA}
               innerRadius={0}
               outerRadius={calculatedRadius + i * RADIUS_WIDTH_FACTOR}
-              angle={100}
-              rotation={40}
+              angle={80}
+              rotation={49}
               shadowColor={color}
               shadowBlur={shadowBlur}
               shadowOpacity={shadowOpacity}
@@ -69,11 +73,33 @@ const Halo = ({ size, x, y, shielding }) => {
           return (
             <Arc
               x={x - HIDDEN_OBJECT_OFFSET}
-              y={y - calculatedSize - calculatedRadius - HIDDEN_OBJECT_OFFSET}
+              y={
+                y - calculatedSize - calculatedRadius - HIDDEN_OBJECT_OFFSET + 3
+              }
               fill={DEFAULT_COLOR_RGBA}
               innerRadius={0}
               outerRadius={calculatedRadius + i * RADIUS_WIDTH_FACTOR}
               angle={180}
+              key={key}
+              shadowColor={color}
+              shadowBlur={shadowBlur}
+              shadowOpacity={shadowOpacity}
+              shadowOffset={{
+                x: HIDDEN_OBJECT_OFFSET,
+                y: HIDDEN_OBJECT_OFFSET,
+              }}
+            />
+          );
+        case TOP_SHIELDING:
+          return (
+            <Arc
+              x={x - HIDDEN_OBJECT_OFFSET}
+              y={y - calculatedSize - calculatedRadius - HIDDEN_OBJECT_OFFSET}
+              fill={DEFAULT_COLOR_RGBA}
+              innerRadius={0}
+              outerRadius={calculatedRadius + i * RADIUS_WIDTH_FACTOR}
+              angle={240}
+              rotation={-30}
               key={key}
               shadowColor={color}
               shadowBlur={shadowBlur}

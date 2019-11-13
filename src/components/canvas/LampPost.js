@@ -10,6 +10,7 @@ import {
 import {
   FULL_SHIELDING,
   HALF_SHIELDING,
+  TOP_SHIELDING,
   NO_SHIELDING,
   SIZE_LARGE,
   SIZE_SMALL,
@@ -21,7 +22,7 @@ class LampPost extends Component {
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired,
     size: PropTypes.oneOf(['small', 'large']),
-    shielding: PropTypes.oneOf(['none', 'half', 'full']),
+    shielding: PropTypes.oneOf(['none', 'top', 'half', 'full']),
     stroke: PropTypes.string,
     dispatchRemoveLampPost: PropTypes.func.isRequired,
     dispatchChangeLampPostShielding: PropTypes.func.isRequired,
@@ -47,7 +48,7 @@ class LampPost extends Component {
   };
 
   calculateRadius = (scale = 1) => {
-    return scale * 20;
+    return scale * 15;
   };
 
   handlePostClick = ({ target }) => {
@@ -79,6 +80,9 @@ class LampPost extends Component {
 
     switch (shielding) {
       case NO_SHIELDING:
+        dispatchChangeLampPostShielding({ x: id, shielding: 'top' });
+        break;
+      case TOP_SHIELDING:
         dispatchChangeLampPostShielding({ x: id, shielding: 'half' });
         break;
       case HALF_SHIELDING:
@@ -97,45 +101,113 @@ class LampPost extends Component {
     switch (shielding) {
       case FULL_SHIELDING:
         return (
-          <Line
-            points={[
-              x - this.calculateRadius() * 1.5,
-              y - this.calculateSize(size) - this.calculateRadius(),
-              x + this.calculateRadius() * 1.5,
-              y - this.calculateSize(size) - this.calculateRadius(),
-              x + this.calculateRadius(),
-              y - this.calculateRadius() * 2 - this.calculateSize(size),
-              x - this.calculateRadius(),
-              y - this.calculateRadius() * 2 - this.calculateSize(size),
-              x - this.calculateRadius() * 1.5,
-              y - this.calculateSize(size) - this.calculateRadius(),
-            ]}
-            fill="black"
-            stroke="black"
-            strokeWidth={5}
-            onClick={() =>
-              dispatchChangeLampPostShielding({ x, shielding: 'none' })
-            }
-            onTap={() =>
-              dispatchChangeLampPostShielding({ x, shielding: 'none' })
-            }
-            closed
-          />
+          <React.Fragment>
+            <Line
+              points={[
+                x - this.calculateRadius() * 1.2,
+                y - this.calculateSize(size) - this.calculateRadius() + 12,
+                x + this.calculateRadius() * 1.2,
+                y - this.calculateSize(size) - this.calculateRadius() + 12,
+                x + this.calculateRadius() * 1.2,
+                y - this.calculateRadius() * 1.6 - this.calculateSize(size),
+                x + this.calculateRadius() * 0.9,
+                y - this.calculateRadius() * 1.8 - this.calculateSize(size),
+                x - this.calculateRadius() * 0.9,
+                y - this.calculateRadius() * 1.8 - this.calculateSize(size),
+                x - this.calculateRadius() * 1.2,
+                y - this.calculateRadius() * 1.6 - this.calculateSize(size),
+                x - this.calculateRadius() * 1.2,
+                y - this.calculateSize(size) - this.calculateRadius(),
+              ]}
+              fill="black"
+              stroke="black"
+              strokeWidth={5}
+              onClick={() =>
+                dispatchChangeLampPostShielding({ x, shielding: 'none' })
+              }
+              onTap={() =>
+                dispatchChangeLampPostShielding({ x, shielding: 'none' })
+              }
+              closed
+            />
+            <Arc
+              x={x}
+              y={y - this.calculateSize(size) - this.calculateRadius() - 1}
+              outerRadius={this.calculateRadius() + 5}
+              innerRadius={0}
+              angle={180}
+              rotation={180}
+              fill="black"
+            />
+          </React.Fragment>
         );
       case HALF_SHIELDING:
         return (
-          <Arc
-            x={x}
-            y={y - this.calculateSize(size) - this.calculateRadius()}
-            outerRadius={this.calculateRadius()}
-            innerRadius={0}
-            angle={180}
-            rotation={180}
-            onClick={this.handleLampClick}
-            onTap={this.handleLampClick}
-            fill="black"
-            id={x}
-          />
+          <React.Fragment>
+            <Line
+              points={[
+                x - this.calculateRadius() * 1.2,
+                y - this.calculateSize(size) - this.calculateRadius(),
+                x + this.calculateRadius() * 1.2,
+                y - this.calculateSize(size) - this.calculateRadius(),
+                x + this.calculateRadius(),
+                y - this.calculateRadius() * 1.6 - this.calculateSize(size),
+                x + this.calculateRadius() * 0.9,
+                y - this.calculateRadius() * 1.8 - this.calculateSize(size),
+                x - this.calculateRadius() * 0.9,
+                y - this.calculateRadius() * 1.8 - this.calculateSize(size),
+                x - this.calculateRadius(),
+                y - this.calculateRadius() * 1.6 - this.calculateSize(size),
+                x - this.calculateRadius() * 1.2,
+                y - this.calculateSize(size) - this.calculateRadius(),
+              ]}
+              fill="black"
+              stroke="black"
+              strokeWidth={5}
+              closed
+            />
+            <Arc
+              x={x}
+              y={y - this.calculateSize(size) - this.calculateRadius()}
+              outerRadius={this.calculateRadius() + 5}
+              innerRadius={0}
+              angle={180}
+              rotation={180}
+              fill="black"
+              onClick={this.handleLampClick}
+              onTap={this.handleLampClick}
+              id={x}
+            />
+          </React.Fragment>
+        );
+      case TOP_SHIELDING:
+        return (
+          <React.Fragment>
+            <Arc
+              x={x}
+              y={y - this.calculateSize(size) - this.calculateRadius()}
+              outerRadius={this.calculateRadius() + 1}
+              innerRadius={0}
+              angle={120}
+              rotation={210}
+              onClick={this.handleLampClick}
+              onTap={this.handleLampClick}
+              fill="black"
+              id={x}
+            />
+            <Arc
+              x={x}
+              y={y - this.calculateSize(size) - this.calculateRadius() - 8}
+              outerRadius={this.calculateRadius() - 7}
+              innerRadius={0}
+              angle={120}
+              rotation={30}
+              onClick={this.handleLampClick}
+              onTap={this.handleLampClick}
+              fill="black"
+              id={x}
+            />
+          </React.Fragment>
         );
       case NO_SHIELDING:
       default:
@@ -147,7 +219,7 @@ class LampPost extends Component {
     const { x, y, size, stroke, shielding } = this.props;
     return (
       <Fragment>
-        <Halo x={x} y={y} size={size} shielding={shielding} />
+        <Halo x={x} y={y + 5} size={size} shielding={shielding} />
         <Circle
           x={x}
           y={y - this.calculateSize(size) - this.calculateRadius()}
