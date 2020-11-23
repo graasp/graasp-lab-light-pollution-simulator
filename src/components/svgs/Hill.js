@@ -76,7 +76,6 @@ const Hill = ({ x, y, scaleX, scaleY, fill }) => (
       scaleX={scaleX}
       scaleY={scaleY}
     />
-    <Path x={x} y={y} data="" fill={fill} scaleX={scaleX} scaleY={scaleY} />
   </Fragment>
 );
 

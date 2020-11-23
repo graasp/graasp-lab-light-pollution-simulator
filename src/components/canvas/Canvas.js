@@ -12,6 +12,8 @@ import Moon from './Moon';
 import MountainLeft from '../svgs/MountainLeft';
 import MountainRight from '../svgs/MountainRight';
 import Sidewalk from '../svgs/Sidewalk';
+import TreeLeft from '../svgs/TreeLeft';
+import TreeRight from '../svgs/TreeRight';
 import {
   CRESCENT_MOON,
   FIXED_HEIGHT,
@@ -79,6 +81,18 @@ class Canvas extends Component {
       // scaleX: 0.1,
       // scaleY: 0.1,
     },
+    treeLeft: {
+      x: 0,
+      y: 0,
+      // scaleX: 0.1,
+      // scaleY: 0.1,
+    },
+    treeRight: {
+      x: 0,
+      y: 0,
+      // scaleX: 0.1,
+      // scaleY: 0.1,
+    },
   };
 
   static propTypes = {
@@ -96,15 +110,17 @@ class Canvas extends Component {
       mountainLeft,
       mountainRight,
       sidewalk,
+      treeLeft,
+      treeRight,
       width,
       height,
     } = this.state;
     const backgroundCity = {
       ...city,
-      scaleX: 0.15 * scale,
-      scaleY: 0.13 * scale,
-      x: 0.465 * width,
-      y: 0.694 * height,
+      scaleX: 0.2 * scale,
+      scaleY: 0.2 * scale,
+      x: 0.426 * width,
+      y: 0.632 * height,
     };
     const backgroundMountainLeft = {
       ...mountainLeft,
@@ -115,10 +131,10 @@ class Canvas extends Component {
     };
     const backgroundMountainRight = {
       ...mountainRight,
-      scaleX: 3.0 * scale,
-      scaleY: 3.0 * scale,
-      x: 0.93 * width,
-      y: 0.72 * height,
+      scaleX: 1.2 * scale,
+      scaleY: 1.2 * scale,
+      x: 0.925 * width,
+      y: 0.768 * height,
     };
     const theDog = {
       ...dog, // next to the telescope
@@ -158,6 +174,20 @@ class Canvas extends Component {
       x: 0.299 * width,
       y: 0.798 * height,
     };
+    const backgroundTreeLeft = {
+      ...treeLeft,
+      scaleX: 0.9 * scale,
+      scaleY: 0.9 * scale,
+      x: 0.28 * width,
+      y: 0.59 * height,
+    };
+    const backgroundTreeRight = {
+      ...treeRight,
+      scaleX: 0.05 * scale,
+      scaleY: 0.05 * scale,
+      x: 0.95 * width,
+      y: 0.69 * height,
+    };
 
     this.setState({
       city: backgroundCity,
@@ -168,6 +198,8 @@ class Canvas extends Component {
       mountainLeft: backgroundMountainLeft,
       mountainRight: backgroundMountainRight,
       sidewalk: mainSidewalk,
+      treeLeft: backgroundTreeLeft,
+      treeRight: backgroundTreeRight,
     });
   }
 
@@ -192,6 +224,8 @@ class Canvas extends Component {
       mountainLeft,
       mountainRight,
       sidewalk,
+      treeLeft,
+      treeRight,
     } = this.state;
 
     const { classes } = this.props;
@@ -208,23 +242,35 @@ class Canvas extends Component {
             >
               <Provider store={store}>
                 <Layer>
-                  <City
-                    x={city.x}
-                    y={city.y}
-                    scaleX={city.scaleX}
-                    scaleY={city.scaleY}
-                  />
                   <MountainLeft
                     x={mountainLeft.x}
                     y={mountainLeft.y}
                     scaleX={mountainLeft.scaleX}
                     scaleY={mountainLeft.scaleY}
                   />
+                  <City
+                    x={city.x}
+                    y={city.y}
+                    scaleX={city.scaleX}
+                    scaleY={city.scaleY}
+                  />
                   <MountainRight
                     x={mountainRight.x}
                     y={mountainRight.y}
                     scaleX={mountainRight.scaleX}
                     scaleY={mountainRight.scaleY}
+                  />
+                  <TreeLeft
+                    x={treeLeft.x}
+                    y={treeLeft.y}
+                    scaleX={treeLeft.scaleX}
+                    scaleY={treeLeft.scaleX}
+                  />
+                  <TreeRight
+                    x={treeRight.x}
+                    y={treeRight.y}
+                    scaleX={treeRight.scaleX}
+                    scaleY={treeRight.scaleX}
                   />
                   <Dog
                     x={dog.x}
