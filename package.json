@@ -1,6 +1,6 @@
 {
   "name": "graasp-lab-light-simulator",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "author": "Nuno R. C. Gomes",
   "contributors": [
@@ -16,10 +16,12 @@
     "enzyme-adapter-react-16": "1.9.1",
     "i18next": "14.0.1",
     "konva": "3.2.4",
+    "lodash": "4.17.20",
     "prop-types": "15.6.2",
     "qs": "6.6.0",
     "react": "16.8.0",
     "react-dom": "16.8.0",
+    "react-ga": "3.3.0",
     "react-i18next": "10.0.0",
     "react-konva": "16.8.6",
     "react-redux": "6.0.0",
@@ -56,7 +58,7 @@
     "test:ci": "run-s test:coverage report",
     "report": "cat ./coverage/lcov.info | env-cmd ./.env.test codacy-coverage",
     "eject": "react-scripts eject",
-    "release": "git add CHANGELOG.md && standard-version -a"
+    "release": "git fetch --tags && git add CHANGELOG.md && standard-version -a"
   },
   "devDependencies": {
     "@commitlint/cli": "7.5.0",

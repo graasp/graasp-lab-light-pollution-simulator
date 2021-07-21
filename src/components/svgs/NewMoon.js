@@ -27,8 +27,9 @@ NewMoon.propTypes = {
 };
 
 NewMoon.defaultProps = {
-  // make new moon visible enough
-  fill: '#403f3f', // #333232 is the colour of the sky
+  // new moon is by default just invisible
+  // #333232 is the colour of the sky
+  fill: 'transparent',
   onClick: () => {},
 };
 

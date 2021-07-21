@@ -18,10 +18,16 @@ import {
   FLAG_DELETING_APP_INSTANCE_RESOURCE,
   DELETE_APP_INSTANCE_RESOURCE_FAILED,
   DELETE_APP_INSTANCE_RESOURCE_SUCCEEDED,
+  GET_APP_INSTANCE_RESOURCES,
+  POST_APP_INSTANCE_RESOURCE,
+  PATCH_APP_INSTANCE_RESOURCE,
+  DELETE_APP_INSTANCE_RESOURCE,
 } from '../types';
-import { flag, getApiContext, isErrorResponse } from './common';
+import { flag, getApiContext, isErrorResponse, postMessage } from './common';
 import { showErrorToast } from '../utils/toasts';
 import { MISSING_APP_INSTANCE_RESOURCE_ID_MESSAGE } from '../constants/messages';
+import { APP_INSTANCE_RESOURCE_FORMAT } from '../config/formats';
+import { DEFAULT_VISIBILITY } from '../config/settings';
 
 const flagGettingAppInstanceResources = flag(
   FLAG_GETTING_APP_INSTANCE_RESOURCES
@@ -38,18 +44,41 @@ const getAppInstanceResources = async ({
   userId,
   sessionId,
   type,
+  // include public resources by default
+  includePublic = true,
 } = {}) => async (dispatch, getState) => {
   dispatch(flagGettingAppInstanceResources(true));
   try {
-    const { appInstanceId, apiHost, standalone } = getApiContext(getState);
+    const {
+      appInstanceId,
+      apiHost,
+      offline,
+      spaceId,
+      subSpaceId,
+      standalone,
+    } = getApiContext(getState);
 
     // if standalone, you cannot connect to api
     if (standalone) {
       return false;
     }
 
-    let url = `//${apiHost +
-      APP_INSTANCE_RESOURCES_ENDPOINT}?appInstanceId=${appInstanceId}`;
+    // if offline send message to parent requesting resources
+    if (offline) {
+      return postMessage({
+        type: GET_APP_INSTANCE_RESOURCES,
+        payload: {
+          type,
+          spaceId,
+          subSpaceId,
+          appInstanceId,
+        },
+      });
+    }
+
+    const queryParams = `appInstanceId=${appInstanceId}&includePublic=${includePublic}`;
+
+    let url = `//${apiHost + APP_INSTANCE_RESOURCES_ENDPOINT}?${queryParams}`;
 
     // only add userId or sessionId, not both
     if (userId) {
@@ -82,27 +111,56 @@ const getAppInstanceResources = async ({
   }
 };
 
-const postAppInstanceResource = async ({ data, userId } = {}) => async (
-  dispatch,
-  getState
-) => {
+const postAppInstanceResource = async ({
+  data,
+  userId,
+  type,
+  visibility = DEFAULT_VISIBILITY,
+} = {}) => async (dispatch, getState) => {
   dispatch(flagPostingAppInstanceResource(true));
   try {
-    const { appInstanceId, apiHost, standalone } = getApiContext(getState);
+    const {
+      appInstanceId,
+      apiHost,
+      offline,
+      spaceId,
+      subSpaceId,
+      standalone,
+    } = await getApiContext(getState);
 
     // if standalone, you cannot connect to api
     if (standalone) {
       return false;
     }
 
+    // if offline send message to parent requesting to create a resource
+    if (offline) {
+      return postMessage({
+        type: POST_APP_INSTANCE_RESOURCE,
+        payload: {
+          data,
+          type,
+          spaceId,
+          subSpaceId,
+          format: APP_INSTANCE_RESOURCE_FORMAT,
+          appInstanceId,
+          userId,
+          visibility,
+        },
+      });
+    }
+
     const url = `//${apiHost + APP_INSTANCE_RESOURCES_ENDPOINT}`;
 
     const body = {
       data,
+      type,
+      format: APP_INSTANCE_RESOURCE_FORMAT,
       appInstance: appInstanceId,
       // here you can specify who the resource will belong to
       // but applies if the user making the request is an admin
       user: userId,
+      visibility,
     };
 
     const response = await fetch(url, {
@@ -135,11 +193,32 @@ const patchAppInstanceResource = async ({ id, data } = {}) => async (
 ) => {
   dispatch(flagPatchingAppInstanceResource(true));
   try {
-    const { apiHost, standalone } = getApiContext(getState);
+    const {
+      appInstanceId,
+      apiHost,
+      offline,
+      spaceId,
+      subSpaceId,
+      standalone,
+    } = await getApiContext(getState);
 
     // if standalone, you cannot connect to api
     if (standalone) {
       return false;
+    }
+
+    // if offline send message to parent requesting to patch resource
+    if (offline) {
+      return postMessage({
+        type: PATCH_APP_INSTANCE_RESOURCE,
+        payload: {
+          data,
+          spaceId,
+          subSpaceId,
+          appInstanceId,
+          id,
+        },
+      });
     }
 
     if (!id) {
@@ -179,11 +258,18 @@ const patchAppInstanceResource = async ({ id, data } = {}) => async (
 const deleteAppInstanceResource = async id => async (dispatch, getState) => {
   dispatch(flagDeletingAppInstanceResource(true));
   try {
-    const { apiHost, standalone } = getApiContext(getState);
+    const { apiHost, offline, standalone } = await getApiContext(getState);
 
     // if standalone, you cannot connect to api
     if (standalone) {
       return false;
+    }
+
+    // if offline send message to parent requesting to delete a resource
+    if (offline) {
+      return postMessage({
+        type: DELETE_APP_INSTANCE_RESOURCE,
+      });
     }
 
     if (!id) {

@@ -41,7 +41,7 @@ class Settings extends Component {
     open: PropTypes.bool.isRequired,
     settings: PropTypes.shape({
       headerVisible: PropTypes.bool.isRequired,
-      lang: PropTypes.string.isRequired,
+      // lang: PropTypes.string.isRequired,
     }).isRequired,
     t: PropTypes.func.isRequired,
     dispatchCloseSettings: PropTypes.func.isRequired,
@@ -144,7 +144,9 @@ class Settings extends Component {
 const mapStateToProps = ({ settings, appInstance }) => ({
   open: settings.open,
   settings: {
-    headerVisible: appInstance ? appInstance.settings.headerVisible : true,
+    headerVisible: appInstance
+      ? appInstance.content.settings.headerVisible
+      : true,
   },
 });
 
